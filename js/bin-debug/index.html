@@ -1,0 +1,69 @@
+<html>
+	<head>
+		<script type="text/javascript" src="jwplayer.js"></script>
+		<script type="text/javascript">	
+			function getTag(tagName){
+				var selected = jwplayer.utils.selectors(tagName);
+				for (var i = 0; i < selected.length; i++){
+					print(selected[i].innerHTML);
+				}				
+			}
+			
+			function getClass(className){
+				var selected = jwplayer.utils.selectors(className);
+				for (var i = 0; i < selected.length; i++){
+					print(selected[i].innerHTML);
+				}				
+			}
+			
+			function getId(idName){
+				var selected = jwplayer.utils.selectors(idName);
+				if (selected !== null){
+					print(selected.innerHTML);					
+				}
+			}
+			
+			function getTagAndClass(tagAndClassName){
+				var selected = jwplayer.utils.selectors(tagAndClassName);
+				for (var i = 0; i < selected.length; i++){
+					print(selected[i].innerHTML);
+				}
+			}
+			
+			function print(msg){
+				alert(msg);
+			}
+
+		</script>
+		<title>JWPlayer JSCore Testing Page</title>
+	</head>
+	<body>
+		<h1>JWPlayer JSCore Testing Page</h1>
+		<div class="class1" id="div1">
+			This is &lt;div&gt; 1.
+		</div>
+		<div class="class2" id="div2">
+			This is &lt;div&gt; 2.
+		</div>
+		<video class="class1" id="video1" src="http://playertest.longtailvideo.com/bunny.mp4" controls>
+			Alternate Video Text.
+		</video>
+		<h3>Null Tests</h3>
+		<a href="#" onclick="getClass('.class');return false;">Class test - null</a><br />
+		<a href="#" onclick="getTag('object');return false;">Tag test - null</a><br />
+		<a href="#" onclick="getId('#div');return false;">Tag test - null</a><br />
+		<a href="#" onclick="getTagAndClass('video.class2');return false;">Tag and Class test - null</a><br />
+
+		<h3>HTML4 tests</h3>
+		<a href="#" onclick="getTag('div');return false;">Tag test - div</a><br />
+		<a href="#" onclick="getId('#div1');return false;">Tag test - div</a><br />
+		<a href="#" onclick="getTagAndClass('div.class1');return false;">Tag and Class test - div</a><br />
+
+
+		<h3>HTML5 tests</h3>
+		<a href="#" onclick="getTag('video');return false;">Tag test - video</a><br />
+		<a href="#" onclick="getId('#video1');return false;">Tag test - video</a><br />
+		<a href="#" onclick="getClass('.class1');return false;">Class test</a><br />
+		<a href="#" onclick="getTagAndClass('video.class1');return false;">Tag and Class test - video</a><br />
+	</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <title>Social Media</title>
+        <script type="text/javascript" src="../../bin-debug/jwplayer.js">
+        </script>
+		<script type="text/javascript" src="settings.js">
+        </script>
+    </head>
+    <body>
+        <script type="text/javascript">
+            document.write("<h1>" + document.title + "</h1>");
+        </script>
+        <p>
+            This parses a &lt;video&gt; tag and sets up a player in it's place for IE9, FF, Chrome, Safari, and Opera. IE < 9 will simply display "HTML5 Player should replace this".
+        </p>
+        <video height="270" id="player" poster="http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg" width="480">
+            <source src="http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4" type="video/mp4" /><source src="http://content.bitsontherun.com/videos/gSzpo2wh-604476.ogv" type="video/ogg" />
+            <p>
+                HTML5 Player should replace this.
+            </p>
+        </video>
+        <!-- AddThis Button BEGIN -->
+        <script type="text/javascript">
+            var addthis_config = {
+            	services_exclude: 'print'
+            }
+        </script>
+        <div id="buttons_social" class="addthis_toolbox">
+            <div class="custom_images">
+                <a class="addthis_button_mailto"><img src="http://www.erstmalkucken.com/graphplayer/social_mail.png" width="23" height="20" alt="per email" title="Weitersagen per Email" /></a><a class="addthis_button_twitter"><img src="http://www.erstmalkucken.com/graphplayer/social_twitter.png" width="23" height="20" alt="auf twitter" title="Weitersagen auf Twitter" /></a><a class="addthis_button_facebook"><img src="http://www.erstmalkucken.com/graphplayer/social_facebook.png" width="23" height="20" alt="auf facebook" title="Teilen auf Facebook" /></a><a class="addthis_button_compact"><img src="http://www.erstmalkucken.com/graphplayer/social_mehr.png" width="23" height="20" alt="mehr social services" /></a>
+            </div>
+        </div>
+        <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#username=erstmalkucken">
+        </script>
+        <!-- AddThis Button END -->
+        <iframe src="http://www.facebook.com/plugins/like.php?href=http://www.erstmalkucken.com/www.erstmalkucken.com/anwalt-kanzlei-dr-patrick-gau-dortmund.html.html&amp;layout=standard&amp;show_faces=false&amp;width=360&amp;action=like&amp;colorscheme=light" scrolling="no" frameborder="0" allowTransparency="true" style="position:absolute; border:none; overflow:hidden; width:360px; height:23px; top:658px; left:280px">
+        </iframe>
+        <script type="text/javascript">
+            jwplayer("player").setup({
+            	players: settings.players(window.location.href),
+            	plugins: {
+            		hd: {
+            			file: 'hd.mp4'
+            		}
+            	}
+            });
+        </script>
+        <h3>HTML code</h3>
+    </body>
+</html>

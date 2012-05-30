@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>Metadata Translation Unit Tester</title>
+<script type="text/javascript" src="../../bin-debug/jwplayer.js"></script>
+<script type="text/javascript" src="settings.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+   document.write("<h1>" + document.title + "</h1>");
+</script>
+
+<p>This tests the metadata translation method from Flash to
+JavaScript. This test should work in all browsers. No players are set up
+on this page - only JavaScript.</p>
+
+<div height="270" id="player" width="480"></div>
+<h2>Result</h2>
+<p id="result">Running...</p>
+<script type="text/javascript">
+            var script = [{
+            	action: function() {
+            	},
+            	getter: function() {
+            		var fromPlayer = {"presetname":"Custom","program":"Graduation","information__spc__url":"","keywords":"vbrick","information":"VBrick Streaming Video","creationdate":"TUE JAN 31 08:58:37 2012\n","contact__spc__phone":"","type":"metadata","version":"5.9.2115","contact__spc__email":"","transmitter__spc__name":"RTMP Transmitter","copyright":"University of Manchester","author":"e-Learning Applications Team","category":"","id":"mediaspace","stream__spc__name":"Flash","client":"FLASH MAC 11,1,102,55","contact__spc__name":""};
+            		return jwplayer.utils.deepReplaceKeyName(fromPlayer, ["__dot__","__spc__","__dsh__"], ["."," ","-"]);
+            	},
+            	expectedValue: {"presetname":"Custom","program":"Graduation","keywords":"vbrick","information":"VBrick Streaming Video","creationdate":"TUE JAN 31 08:58:37 2012\n","type":"metadata","version":"5.9.2115","copyright":"University of Manchester","author":"e-Learning Applications Team","category":"","id":"mediaspace","client":"FLASH MAC 11,1,102,55","information url":"","contact phone":"","contact email":"","transmitter name":"RTMP Transmitter","stream name":"Flash","contact name":""}
+            },{
+            	action: function() {
+        		},
+        		getter: function() {
+        			var fromPlayer = {
+						"foo": 1,
+						"bar__dsh__bar": 2,
+						"a__spc__b": {
+							"foo": 1,
+							"bar__dsh__bar": [{"one__dot__two": 1.2},{"three__dot__four__dot__five__spc__six": "3.4.5 6"}]
+        				}
+                	};
+        			return jwplayer.utils.deepReplaceKeyName(fromPlayer, ["__dot__","__spc__","__dsh__"], ["."," ","-"]);
+        		},
+        		expectedValue: {
+					"foo": 1,
+					"bar-bar": 2,
+					"a b": {
+						"foo": 1,
+						"bar-bar": [{"one.two": 1.2},{"three.four.five six": "3.4.5 6"}]
+    				}
+        		}
+            }];
+            
+            var scriptPos = -1;
+            startScript();
+            
+
+            function startScript() {
+            	if (scriptPos == -1) {
+            		scriptPos++;
+            		runScript();
+            	}
+            }
+
+
+            function deepEquals(varA, varB) {
+            	if (jwplayer.utils.typeOf(varA) != jwplayer.utils.typeOf(varB)) {
+                	return false;
+            	}
+       			switch (jwplayer.utils.typeOf(varA)) {
+       			case "object":
+       				for ( var element in varA) {
+       					var test = deepEquals(varA[element], varB[element]);
+       					if (!test) {
+           					return false;
+       					}
+       				}
+       				break;
+       			case "array":
+           			if (varA.length != varB.length) return false;
+       				for (var element=0; element < varA.length; element++) {
+       					var test = deepEquals(varA[element], varB[element]);
+       					if (!test) {
+           					return false;
+       					}
+       				}
+       				break;
+       			default:
+       				return varA == varB;
+       			}
+        		return true;
+        	};
+            
+            function runScript() {
+            	if (scriptPos == script.length) {
+            		document.getElementById("result").innerHTML = "Success!";
+            		return;
+            	}
+            	script[scriptPos].action();
+            	if (deepEquals(script[scriptPos].getter(), script[scriptPos].expectedValue)) {
+					document.getElementById("result").innerHTML = Math.round((scriptPos / script.length) * 100) + "% complete";
+            		scriptPos++;
+            		setTimeout(function() {
+            			runScript();
+            		}, 250);
+            	} else {
+            		document.getElementById("result").innerHTML = "Error at step " + (scriptPos + 1) + ": Got " + JSON.stringify(script[scriptPos].getter()) + " and expected " + JSON.stringify(script[scriptPos].expectedValue);
+            	}
+            }
+        </script>
+</body>
+</html>

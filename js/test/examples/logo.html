@@ -1,0 +1,143 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <title>Logo</title>
+        <script type="text/javascript" src="../../bin-debug/jwplayer.js">
+        </script>
+        <script type="text/javascript" src="settings.js">
+        </script>
+    </head>
+    <body>
+      <script type="text/javascript">
+            document.write("<h1>" + document.title + "</h1>");
+        </script>
+        <p>This test the various configuration options for the logo. Video should play natively on FF, Chrome, Safari, and Opera but will fail in IE.</p>
+
+        <form onsubmit="return false">
+          <label>Select a rendering mode:</label>
+          <select id="renderer">
+            <option value="flashonly">Flash Only</option>
+            <option value="html5only" selected="selected">HTML5 Only</option>
+          </select>
+          <button id="go" onclick="setupAll()">Go</button>
+        </form>
+
+		<h2>Default logo</h2>
+		<div height="270" id="player1" width="480"></div>
+		
+		<h2>No logo</h2>		
+    <div height="270" id="player2" width="480"></div>
+    
+		<h2>Modified logo, top right, hiding set to false (Boolean)</h2>
+		<div height="270" id="player3" width="480"></div>
+		
+		<h2>Modified logo, top right, hiding set to "false" (String)</h2>
+		<div height="270" id="player4" width="480"></div>
+		
+		<h2>Modified logo with a custom margin, hiding "false"</h2>
+		<div height="270" id="player5" width="480"></div>
+
+		<h2>Modified logo with a custom margin (String value), hiding "false"</h2>
+		<div height="270" id="player6" width="480"></div>
+
+		<h2>Modified logo with a link and linktarget</h2>
+		<div height="270" id="player7" width="480"></div>
+		
+        <h3>HTML code</h3>
+        
+        <script type="text/javascript">
+          function setupAll() {
+            var mode = document.getElementById("renderer").value;
+          
+            jwplayer("player1").setup({
+            	players: settings.modes[mode],
+            	levels: [{
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4"
+            	}, {
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-604476.ogv"
+            	}],
+            	image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg"            	
+            });
+
+            jwplayer("player2").setup({
+            	players: settings.modes[mode],
+            	levels: [{
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4"
+            	}, {
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-604476.ogv"
+            	}],
+            	image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg",
+            	'logo.file': "",
+            	'logo.prefix': ""
+            });
+
+            jwplayer("player3").setup({
+            	players: settings.modes[mode],
+            	levels: [{
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4"
+            	}, {
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-604476.ogv"
+            	}],
+            	image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg",
+            	'logo.file': "http://www.dumbview.com/images/dv.jpg",
+            	'logo.position': "top-right",
+            	'logo.hide': false
+            });
+
+            jwplayer("player4").setup({
+            	players: settings.modes[mode],
+            	levels: [{
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4"
+            	}, {
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-604476.ogv"
+            	}],
+            	image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg",
+            	'logo.file': "http://www.dumbview.com/images/dv.jpg",
+            	'logo.position': "top-right",
+            	'logo.hide': "false"
+            });
+          
+            jwplayer("player5").setup({
+            	players: settings.modes[mode],
+            	levels: [{
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4"
+            	}, {
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-604476.ogv"
+            	}],
+            	image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg",
+            	'logo.file': "http://www.dumbview.com/images/dv.jpg",
+            	'logo.hide': "false",
+            	'logo.margin': 50
+            });
+
+            jwplayer("player6").setup({
+            	players: settings.modes[mode],
+            	levels: [{
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4"
+            	}, {
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-604476.ogv"
+            	}],
+            	image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg",
+            	'logo.file': "http://www.dumbview.com/images/dv.jpg",
+            	'logo.hide': "false",
+            	'logo.margin': "50"
+            });
+
+            jwplayer("player7").setup({
+            	players: settings.modes[mode],
+            	levels: [{
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4"
+            	}, {
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-604476.ogv"
+            	}],
+            	image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg",
+            	'logo.file': "http://www.dumbview.com/images/dv.jpg",
+            	'logo.link': "http://www.google.com",
+            	'logo.linktarget': "_blank"
+            });
+
+          }
+          setupAll();
+        </script>
+    </body>
+</html>

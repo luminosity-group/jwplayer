@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <title>Resize</title>
+        <script type="text/javascript" src="../../bin-debug/jwplayer.js">
+        </script>
+        <script type="text/javascript" src="settings.js">
+        </script>
+    </head>
+    <body>
+        <script type="text/javascript">
+            document.write("<h1>" + document.title + "</h1>");
+        </script>
+		 <p>
+           This page contains a player with multiple sources, so it should play back in IE9, FF, Chrome, Safari, and Opera. IE < 9 will simply display "HTML5 Player should replace this".
+        </p>
+        
+        <h3>Steps to reproduce test:</h3>
+        
+        <ol>
+        	<li>Click each of the sizes listed below</li>
+        	<li>Switch to and from fullscreen mode</li>
+        	<li>The sizes should show up in the display, and to the left of the player (in Flash mode, the sizes will not be visible in fullscreen)</li>
+        	<li>Repeat for both Flash and HTML5 modes</li>
+       	</ol>
+
+	  <p>Select a rendering mode: 
+	  	<select id="renderer">
+	    	<option value="flashonly">
+	      		Flash Only
+	    	</option>
+		  	<option value="html5only" selected="selected">
+	      		HTML5 Only
+	    	</option>
+  		</select>
+  		<button id="go" onclick="setupAll()">Go</button>
+  	   </p>
+
+
+		<div id="debug" style="float:left; margin-right: 10px"></div>
+
+		<div id="wrapper" style="float:left">
+			<a href="#" onclick="resize(340, 280);return false;">small</a>
+			<a href="#" onclick="resize(640, 480);return false;">medium</a>
+			<a href="#" onclick="resize(720, 640);return false;">large</a>
+		
+	        <div height="270" id="player" width="480">
+	        	 JW Player should replace this.
+	        </div>
+        </div>
+        
+        <script type="text/javascript">
+        function setupAll() {
+    	  	var mode = document.getElementById('renderer').value;
+    	  	if (!mode) mode = "standard";
+
+    	  	jwplayer("player").setup({
+            	modes: settings.modes[mode],
+            	levels: [{
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4"
+            	}, {
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-604476.ogv"
+            	}],
+            	width: 340,
+            	height: 280,
+            	image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg",
+            	controlbar: "bottom",
+            	plugins: {
+					"plugins/resizeplugin.js": {
+						debug: "debug"
+					}
+    	  		}
+            });
+        }
+        
+		function resize(width, height) {
+			jwplayer("player").resize(width, height);
+		}
+
+		setupAll();
+        </script>
+        <h3 style="clear:both">HTML code</h3>
+    </body>
+</html>

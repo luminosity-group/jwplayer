@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <title>FireFox Bug</title>
+        <script type="text/javascript" src="../../bin-debug/jwplayer.js">
+        </script>
+        <script type="text/javascript" src="settings.js">
+        </script>
+    </head>
+    <body>
+        <script type="text/javascript">
+            document.write("<h1>" + document.title + "</h1>");
+        </script>
+        <p>
+            There is a bug in FF when you call load with "#" in the page URL. A fix was put in place.
+        </p>
+        <p>
+            This page contains a player with multiple sources, so it should play back in IE9, FF, Chrome, Safari, and Opera. IE < 9 will simply display "HTML5 Player should replace this".
+        </p>
+        <div height="270" id="player" width="480">
+            HTML5 Player should replace this.
+        </div>
+        <script type="text/javascript">
+            jwplayer("player").setup({
+            	players: settings.players(window.location.href),
+            	levels: [{
+            		file: "http://playertest.longtailvideo.com/bunny.mp4"
+            	}, {
+            		file: "http://playertest.longtailvideo.com/bunny.ogv"
+            	}],
+            	image: "http://playertest.longtailvideo.com/bunny.jpg"
+            });
+            
+            var playlistItem = {
+            	levels: [{
+            		file: 'http://content.bitsontherun.com/videos/guYqV1AB-486405.mp4'
+            	}, {
+            		file: 'http://content.bitsontherun.com/videos/guYqV1AB-604476.ogv'
+            	}],
+            	image: 'http://content.bitsontherun.com/thumbs/guYqV1AB-480.jpg'
+            };
+            
+            var playlist = [{
+            	levels: [{
+            		file: 'http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4'
+            	}, {
+            		file: 'http://content.bitsontherun.com/videos/gSzpo2wh-604476.ogv'
+            	}],
+            	image: 'http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg'
+            }, {
+            	levels: [{
+            		file: 'http://content.bitsontherun.com/videos/guYqV1AB-486405.mp4'
+            	}, {
+            		file: 'http://content.bitsontherun.com/videos/guYqV1AB-604476.ogv'
+            	}],
+            	image: 'http://content.bitsontherun.com/thumbs/guYqV1AB-480.jpg'
+            }, {
+            	levels: [{
+            		file: 'http://content.bitsontherun.com/videos/DMJODX8R-486405.mp4'
+            	}, {
+            		file: 'http://content.bitsontherun.com/videos/DMJODX8R-604476.ogv'
+            	}],
+            	image: 'http://content.bitsontherun.com/thumbs/DMJODX8R-480.jpg'
+            }];
+            
+            function load(item) {
+            	jwplayer("player").load(item);
+            }
+        </script>
+        <a href="#" onclick="load('http://content.bitsontherun.com/videos/guYqV1AB-486405.mp4');return false;">File (mp4)</a>
+        <a href="#" onclick="load('http://content.bitsontherun.com/videos/guYqV1AB-604476.ogv');return false;">File (ogv)</a>
+        <a href="#" onclick="load(playlistItem);return false;">Playlist Item</a>
+        <a href="#" onclick="load(playlist);return false;">3-item playlist</a>
+        <h3>HTML code</h3>
+    </body>
+</html>

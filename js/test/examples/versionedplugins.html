@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <title>Multiple sources</title>
+        <script type="text/javascript" src="../../bin-debug/jwplayer.js">
+        </script>
+        <script type="text/javascript" src="settings.js">
+        </script>
+    </head>
+    <body>
+        <script type="text/javascript">
+            document.write("<h1>" + document.title + "</h1>");
+        </script>
+        <p>
+            Bug: Versions for JS plugins are ignored.
+
+            To test, make sure Captions version 2 (captions-2h.swf) is loaded correctly; including JS stub (captions-2.js)
+        </p>
+        <div>
+        	<h2>Repository plugin</h2>
+            <div id="player">
+                Flash Player should replace this.
+            </div>
+        	<h2>Absolute URL plugin (js)</h2>
+            <div id="player2">
+                Flash Player should replace this.
+            </div>
+        	<h2>Absolute URL plugin (swf)</h2>
+            <div id="player3">
+                Flash Player should replace this.
+            </div>
+        </div>
+        <script type="text/javascript">
+            jwplayer("player").setup({
+            	players: settings.players(window.location.href, ["flash","html5","download"]),
+                levels: [
+                	{ file:'http://playertest.longtailvideo.com/corrie.mp4' },
+                	{ file:'http://playertest.longtailvideo.com/corrie.ogv' }
+                ],
+               	image: "http://playertest.longtailvideo.com/corrie.jpg",
+                height: "270",
+                width: "480",
+                plugins: {
+                    'captions-2': {
+                        file: "http://playertest.longtailvideo.com/corrie.srt"   
+                    }
+                } 
+            });
+
+            jwplayer("player2").setup({
+            	players: settings.players(window.location.href, ["flash","html5","download"]),
+                levels: [
+                	{ file:'http://playertest.longtailvideo.com/corrie.mp4' },
+                	{ file:'http://playertest.longtailvideo.com/corrie.ogv' }
+                ],
+               	image: "http://playertest.longtailvideo.com/corrie.jpg",
+                height: "270",
+                width: "480",
+                plugins: {
+                    'http://plugins.longtailvideo.com/5/hd/hd-1.js': {
+                        file: "http://playertest.longtailvideo.com/bunny.mp4"   
+                    }
+                } 
+            });
+            
+            jwplayer("player3").setup({
+            	players: settings.players(window.location.href, ["flash","html5","download"]),
+                levels: [
+                	{ file:'http://playertest.longtailvideo.com/corrie.mp4' },
+                	{ file:'http://playertest.longtailvideo.com/corrie.ogv' }
+                ],
+               	image: "http://playertest.longtailvideo.com/corrie.jpg",
+                height: "270",
+                width: "480",
+                plugins: {
+                    'http://plugins.longtailvideo.com/5/sharing/sharing-1.swf': {
+                        link: "http://www.longtailvideo.com"   
+                    }
+                } 
+            });
+        </script>
+        <h3>HTML code</h3>
+    </body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <title>XML playlists</title>
+        <script type="text/javascript" src="../../bin-debug/jwplayer.js"></script>
+        <script type="text/javascript" src="settings.js">
+        </script>
+    </head>
+    <body>
+        <script type="text/javascript">
+            document.write("<h1>" + document.title + "</h1>");
+        </script>
+        <p>
+            This test the various configuration options for plugins. Video should play natively on FF, Chrome, Safari, and Opera but will fail in IE.
+        </p>
+        <table id="examplestable">
+        </table>
+        <script type="text/javascript">
+            var examplestable = document.getElementById("examplestable");
+            var players = [["flash", "html5", "download"], ["html5", "download"]];
+            var tests = [{
+            	name: "MRSS playlist (playlistfile)",
+            	config: {
+    			   		playlistfile:"assets/mrss.xml",
+            		image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg",
+            		'playlist.position': "right",
+            		'playlist.size': "180",
+            		width: 480,
+            		height: 280
+            	}
+            },{
+            	name: "MRSS playlist (file)",
+            	config: {
+    			   		file:"assets/mrss.xml",
+            		image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg",
+            		'playlist.position': "right",
+            		'playlist.size': "180",
+            		width: 480,
+            		height: 280
+            	}
+            },{
+            	name: "MRSS playlist (first playlist item)",
+            	config: {
+    			   		playlist: [{file:"assets/mrss.xml"}],
+            		image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg",
+            		'playlist.position': "right",
+            		'playlist.size': "180",
+            		width: 480,
+            		height: 280
+            	}
+            }];
+            
+            for (var test in tests) {
+            	if (isNaN(test)) {
+            		break;
+            	}
+            	var row = document.createElement("tr");
+            	examplestable.appendChild(row);
+            	var label = document.createElement("td");
+            	row.appendChild(label);
+            	var labelTag = document.createElement("h2");
+            	label.appendChild(labelTag);
+            	labelTag.innerHTML = tests[test].name;
+            	for (var player in players) {
+            		if (isNaN(player)) {
+            			break;
+            		}
+            		var column = document.createElement("td");
+            		row.appendChild(column);
+            		var div = document.createElement("div");
+            		column.appendChild(div);
+            		var playerName = ("player-" + tests[test].name + "-" + players[player].join("-")).replace(/[^A-Za-z0-9\-\_]/g, "").toLowerCase();
+            		div.id = playerName;
+            		div.height = 270;
+            		div.width = 480;
+            		var config = jwplayer.utils.extend({
+            			name: playerName,
+            			players: settings.players(window.location.href, players[player])
+            		}, tests[test].config);
+            		var setup = jwplayer(playerName).setup(config);
+            	}
+            }
+            
+        </script>
+        <h3>HTML code</h3>
+    </body>
+</html>

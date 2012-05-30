@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <title>Netstream base path</title>
+        <script type="text/javascript" src="../../bin-debug/jwplayer.js">
+        </script>
+        <script type="text/javascript" src="settings.js">
+        </script>
+        <script src="https://www.google.com/jsapi?key=ABQIAAAAmW4wY4GLARKwRKxx1EY4dxTCwYuWkdD_iTnqF3uxU7_DebvfxBREab8CD-MRcuvG-IzP2uSZrQpweg" type="text/javascript">
+        </script>
+        <script language="Javascript" type="text/javascript">
+            google.load("swfobject", "2");
+        </script>
+    </head>
+    <body>
+        <script type="text/javascript">
+            document.write("<h1>" + document.title + "</h1>");
+        </script>
+        <p>
+            This page sets up a players to test referencing files in the Flash player for the Video and HTTP (streaming) models. You should open Charles and confirm that you do not see any duplicate requests for resources, and that no resources have //, ./, or ../ in their path.
+        </p>
+        <p>
+            It parses a &lt;video&gt; tag and sets up a player in it's place for all browsers.
+        </p>
+        <h2>Video Model</h2>
+        <h3>No netstreambasepath flashvar</h3>
+        <p>
+            This references files based on a relative path, vis-a-vis "./videos/video.mp4"
+        </p>
+		<div id="player1"></div>
+        <script type="text/javascript">
+            var flashvars = {
+            	file: escape('http://playertest.longtailvideo.com/bunny.mp4'),
+				image: 'http://playertest.longtailvideo.com/bunny.png'
+            };
+            var params = {
+            	allowfullscreen: 'true',
+            	allowscriptaccess: 'always'
+            };
+            var attributes = {
+            	id: 'player1',
+            	name: 'player1'
+            };
+            
+            swfobject.embedSWF('../../../player.swf', 'player1', '480', '270', '9.0.115', 'false', flashvars, params, attributes);
+        </script>
+        <h3>With netstreambase flashvar</h3>
+        <p>
+            This references files with the netstreambase path set to the current page URL.
+        </p>
+        <video height="270" id="player2" poster="http://playertest.longtailvideo.com/bunny.png" width="480">
+            <source src="http://playertest.longtailvideo.com/bunny.mp4" type="video/mp4" />
+            <p>
+                HTML5 Player should replace this.
+            </p>
+        </video>
+        <script type="text/javascript">
+            jwplayer("player2").setup({
+            	players: settings.players(window.location.href, ["flash"])
+            });
+        </script>
+        <h3>HTML code</h3>
+    </body>
+</html>

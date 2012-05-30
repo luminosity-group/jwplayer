@@ -1,0 +1,45 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <title>Multiple sources</title>
+        <script type="text/javascript" src="../../bin-debug/jwplayer.js">
+        </script>
+        <script type="text/javascript" src="settings.js">
+        </script>
+    </head>
+    <body>
+        <script type="text/javascript">
+            document.write("<h1>" + document.title + "</h1>");
+        </script>
+        <p>
+            Bug: plugins loaded locally and from the LongTail repository wouldn't both load.
+            
+            To test, make sure both plugins (hd and sharing) have been loaded into the player.
+        </p>
+        <div>
+            <div id="player">
+                Flash Player should replace this.
+            </div>
+            <p id="text">This text should be after the player</p>
+        </div>
+        <script type="text/javascript">
+            jwplayer("player").setup({
+            	players: settings.players(window.location.href, ["flash","html5","download"]),
+                file:'http://content.bitsontherun.com/videos/Qvxp3Jnv-483.mp4',
+               	image: "http://content.bitsontherun.com/thumbs/Qvxp3Jnv-480.jpg",
+                height: "270",
+                width: "480",
+                plugins: {
+                    'plugins/hd-1.swf': {
+                        file: "http://playertest.longtailvideo.com/bunny.mp4"   
+                    },
+                    'sharing-1': {
+                        code: "some code",
+                        link: "http://www.google.com"   
+                    }
+                } 
+            });
+        </script>
+        <h3>HTML code</h3>
+    </body>
+</html>

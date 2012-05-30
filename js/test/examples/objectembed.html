@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <title>Object and Embed Tags</title>
+        <script type="text/javascript" src="../../bin-debug/jwplayer.js">
+        </script>
+        <script type="text/javascript" src="settings.js">
+        </script>
+    </head>
+    <body>
+        <script type="text/javascript">
+            document.write("<h1>" + document.title + "</h1>");
+        </script>
+        <p>
+            In IE9, FF, Chrome, Safari, and Opera this will briefly display a Flash player (via an object or embed tag), but that should quickly disappear in favor of the HTML5 player. IE < 9 but will fail in IE.
+        </p>
+        <p>
+            Object tag
+        </p>
+        <object classid='clsid:D27CDB6E-AE6D-11cf-96B8-444553540000' width='470' height='320' id='player1' name='player1'>
+            <param name='movie' value='../../../fl5/player.swf'><param name='allowfullscreen' value='true'><param name='allowscriptaccess' value='always'><param name='wmode' value='transparent'><param name='flashvars' value='file=http://content.longtailvideo.com/videos/flvplayer.flv'>
+        </object>
+        <script type="text/javascript">
+            jwplayer("player1").setup({
+            	players: settings.players(window.location.href),
+            	levels: [{
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4"
+            	}, {
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-604476.ogv"
+            	}],
+            	image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg"
+            });
+        </script>
+        <p>
+            Embed tag
+        </p>
+        <embed id='player2' name='player2' src='../../../fl5/player.swf' width='470' height='320' bgcolor='#000000' allowscriptaccess='always' allowfullscreen='true' flashvars='file=http://content.longtailvideo.com/videos/flvplayer.flv' />
+        <script type="text/javascript">
+            jwplayer("player2").setup({
+            	players: settings.players(window.location.href),
+            	levels: [{
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4"
+            	}, {
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-604476.ogv"
+            	}],
+            	image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg"
+            });
+        </script>
+        <h3>HTML code</h3>
+    </body>
+</html>

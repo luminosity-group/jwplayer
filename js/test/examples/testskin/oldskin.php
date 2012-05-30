@@ -1,0 +1,3 @@
+<?
+Header( "Location: testskin.xml" ); 
+?> 

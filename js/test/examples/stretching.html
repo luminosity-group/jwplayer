@@ -1,0 +1,74 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <title>Stretching</title>
+        <script type="text/javascript" src="../../bin-debug/jwplayer.js">
+        </script>
+        <script type="text/javascript" src="settings.js">
+        </script>
+    </head>
+    <body>
+        <script type="text/javascript">
+            document.write("<h1>" + document.title + "</h1>");
+        </script>
+        <p>
+            This page contains a player with multiple sources, so it should play back in IE9, FF, Chrome, Safari, and Opera. IE < 9 will simply display "HTML5 Player should replace this".
+        </p>
+        <table id="examplestable">
+        </table>
+        <script type="text/javascript">
+            function testPlay(stretching) {
+            	jwplayer("player-" + stretching + "-flash").play();
+            	jwplayer("player-" + stretching + "-html5").play();
+            }
+            
+            var tests = [];
+            for (var stretching in jwplayer.utils.stretching) {
+            	if (typeof stretching == "string") {
+            		tests.push({
+            			name: stretching.toLowerCase(),
+            			players: [["flash", "html5", "download"], ["html5", "flash", "download"]],
+            			config: {
+            				levels: [{
+            					file: "http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4"
+            				}, {
+            					file: "http://content.bitsontherun.com/videos/gSzpo2wh-604476.ogv"
+            				}],
+            				image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg",
+            				stretching: stretching.toLowerCase(),
+            				height: 480,
+            				width: 640
+            			}
+            		});
+            	}
+            }
+            
+            var examplestable = document.getElementById("examplestable");
+            
+            for (var test in tests) {
+            	var row = document.createElement("tr");
+            	examplestable.appendChild(row);
+            	var label = document.createElement("td");
+	           	row.appendChild(label);
+				var labelTag = document.createElement("h2");
+				label.appendChild(labelTag);
+            	labelTag.innerHTML = tests[test].name;
+            	for (var player in tests[test].players) {
+            		var column = document.createElement("td");
+            		row.appendChild(column);
+            		var div = document.createElement("div");
+            		column.appendChild(div);
+            		var playerName = "player-" + tests[test].name + "-" + tests[test].players[player].join("-");
+            		div.id = playerName;
+            		div.height = 270;
+            		div.width = 480;
+					var config = jwplayer.utils.extend({
+            			players: settings.players(window.location.href, tests[test].players[player])
+            		}, tests[test].config);
+            		var setup = jwplayer(playerName).setup(config);
+            	}
+            }
+        </script>
+        <h3>HTML code</h3>
+    </body>
+</html>

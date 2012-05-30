@@ -1,0 +1,65 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <title>Single MP3 Example</title>
+        <script type="text/javascript" src="../../bin-debug/jwplayer.js">
+        </script>
+        <script type="text/javascript" src="settings.js">
+        </script>
+    </head>
+    <body>
+        <script type="text/javascript">
+            document.write("<h1>" + document.title + "</h1>");
+        </script>
+        <p>This sets up a player for IE9, FF, Chrome, Safari, and Opera which plays a single MP3 file.  In Firefox and Opera, HTML5 mode will fail over to Flash mode.</p>
+        <p>
+          Select a rendering mode: 
+          <select id="renderer">
+            <option value="flash">Flash -> HTML5</option>
+            <option value="html5" selected="selected">HTML5 -> Flash</option>
+          </select>
+          <button id="go" onclick="setupAll()">Go</button>
+        </p>
+
+        
+        <h3>Auto-detect provider</h3>
+        <div height="270" id="player1" width="480">
+        	JW Player should replace this
+        </div>
+        <h3>Provider set to "audio" (should alias to Sound)</h3>
+        <div height="270" id="player2" width="480">
+        	JW Player should replace this
+        </div>
+        <script type="text/javascript">
+          function setupAll() {
+            var mode = document.getElementById('renderer').value;
+            if (!mode) mode = "standard";
+          
+            jwplayer("player1").setup({
+            	modes: settings.modes[mode],
+            	playlist: [
+	            	{ 
+            		  file: "http://playertest.longtailvideo.com/bunny.mp3",
+            		  image: "http://playertest.longtailvideo.com/bunny.jpg"
+	            	}
+            	],
+            	controlbar: "bottom"
+            });
+            
+            jwplayer("player2").setup({
+            	modes: settings.modes[mode],
+            	playlist: [
+	            	{ 
+            		  file: "http://playertest.longtailvideo.com/bunny.mp3",
+            		  image: "http://playertest.longtailvideo.com/bunny.jpg",
+            		  provider: "audio"
+	            	}
+            	],
+            	controlbar: "bottom"
+            });
+          }
+          setupAll();
+        </script>
+        <h3>HTML code</h3>
+    </body>
+</html>

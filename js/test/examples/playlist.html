@@ -1,0 +1,415 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <title>Playlists</title>
+        <script type="text/javascript" src="../../bin-debug/jwplayer.js">
+        </script>
+        <script type="text/javascript" src="settings.js">
+        </script>
+    </head>
+    <body>
+        <script type="text/javascript">
+            var type = window.location.href.split("?type=")[1];
+            document.title += ": " + type;
+            var playlists = {
+            	progressive: [{
+            		levels: [{
+            			file: "http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4"
+            		}, {
+            			file: "http://content.bitsontherun.com/videos/gSzpo2wh-604476.ogv"
+            		}],
+            		image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg",
+            		title: "Bunny",
+					"captions.file": "hello.xml"
+            	}, {
+            		levels: [{
+            			file: "http://content.bitsontherun.com/videos/guYqV1AB-486405.mp4"
+            		}, {
+            			file: "http://content.bitsontherun.com/videos/guYqV1AB-604476.ogv"
+            		}],
+            		title: "Corrie",
+            		image: "http://content.bitsontherun.com/thumbs/guYqV1AB-480.jpg",
+					"captions.file": "hello.xml"
+            	}, {
+            		levels: [{
+            			file: "http://content.bitsontherun.com/videos/DMJODX8R-486405.mp4"
+            		}, {
+            			file: "http://content.bitsontherun.com/videos/DMJODX8R-604476.ogv"
+            		}],
+            		title: "Oorlogs",
+            		image: "http://content.bitsontherun.com/thumbs/DMJODX8R-480.jpg",
+					"captions.file": "hello.xml"
+            	}, {
+            		levels: [{
+            			file: "http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4"
+            		}, {
+            			file: "http://content.bitsontherun.com/videos/gSzpo2wh-604476.ogv"
+            		}],
+            		title: "Bunny",
+            		image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg",
+					"captions.file": "hello.xml"
+            	}, {
+            		levels: [{
+            			file: "http://content.bitsontherun.com/videos/guYqV1AB-486405.mp4"
+            		}, {
+            			file: "http://content.bitsontherun.com/videos/guYqV1AB-604476.ogv"
+            		}],
+            		title: "Corrie",
+            		image: "http://content.bitsontherun.com/thumbs/guYqV1AB-480.jpg",
+					"captions.file": "hello.xml"
+            	}, {
+            		levels: [{
+            			file: "http://content.bitsontherun.com/videos/DMJODX8R-486405.mp4"
+            		}, {
+            			file: "http://content.bitsontherun.com/videos/DMJODX8R-604476.ogv"
+            		}],
+            		title: "Oorlogs",
+            		image: "http://content.bitsontherun.com/thumbs/DMJODX8R-480.jpg",
+					"captions.file": "hello.xml"
+            	}],
+            	audio: [{
+            		levels: [{
+            			file: "http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4"
+            		}, {
+            			file: "http://content.bitsontherun.com/videos/gSzpo2wh-604476.ogv"
+            		}],
+            		title: "Bunny",
+            		image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg"
+            	}, {
+            		levels: [{
+            			file: "http://playertest.longtailvideo.com/bunny.mp3"
+            		}, {
+            			file: "http://playertest.longtailvideo.com/bunny.ogg"
+            		}],
+            		title: "Bunny",
+            		image: "http://content.bitsontherun.com/thumbs/guYqV1AB-480.jpg"
+            	}, {
+            		levels: [{
+            			file: "http://content.bitsontherun.com/videos/DMJODX8R-486405.mp4"
+            		}, {
+            			file: "http://content.bitsontherun.com/videos/DMJODX8R-604476.ogv"
+            		}],
+            		title: "Oorlogs",
+            		image: "http://content.bitsontherun.com/thumbs/DMJODX8R-480.jpg"
+            	}, {
+            		levels: [{
+            			file: "http://playertest.longtailvideo.com//bunny.mp3"
+            		}, {
+            			file: "http://playertest.longtailvideo.com//bunny.ogg"
+            		}],
+            		title: "Bunny",
+            		image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg"
+            	}, {
+            		levels: [{
+            			file: "http://content.bitsontherun.com/videos/guYqV1AB-486405.mp4"
+            		}, {
+            			file: "http://content.bitsontherun.com/videos/guYqV1AB-604476.ogv"
+            		}],
+            		title: "Corrie",
+            		image: "http://content.bitsontherun.com/thumbs/guYqV1AB-480.jpg"
+            	}, {
+            		levels: [{
+            			file: "http://playertest.longtailvideo.com/bunny.mp3"
+            		}, {
+            			file: "http://playertest.longtailvideo.com/bunny.ogg"
+            		}],
+            		title: "Bunny",
+            		image: "http://content.bitsontherun.com/thumbs/DMJODX8R-480.jpg"
+            	}],
+            	rtmp: [{
+            		levels: [{
+            			bitrate: "2020",
+            			file: "cg4V7TQw-5RGjFAQM-364803.mp4",
+            			width: "1080"
+            		}, {
+            			bitrate: "1310",
+            			file: "cg4V7TQw-5RGjFAQM-364802.mp4",
+            			width: "720"
+            		}, {
+            			bitrate: "810",
+            			file: "cg4V7TQw-5RGjFAQM-364801.mp4",
+            			width: "480"
+            		}, {
+            			bitrate: "520",
+            			file: "cg4V7TQw-5RGjFAQM-364800.mp4",
+            			width: "320"
+            		}],
+            		title: "Bunny",
+            		image: "http://thumbs.bitsontherun.com/5RGjFAQM.jpg",
+            		type: "RTMP",
+            		streamer: "rtmp://sarzsmiotvm99.cloudfront.net/cfx/st"
+            	}, {
+            		levels: [{
+            			bitrate: "380",
+            			file: "cg4V7TQw-ajuWPle1-364801.mp4",
+            			width: "480"
+            		}, {
+            			bitrate: "270",
+            			file: "cg4V7TQw-ajuWPle1-364800.mp4",
+            			width: "320"
+            		}],
+            		title: "Black Hole",
+            		image: "http://thumbs.bitsontherun.com/ajuWPle1.jpg",
+            		type: "RTMP",
+            		streamer: "rtmp://sarzsmiotvm99.cloudfront.net/cfx/st"
+            	}, {
+            		levels: [{
+            			bitrate: "2020",
+            			file: "cg4V7TQw-5RGjFAQM-364803.mp4",
+            			width: "1080"
+            		}, {
+            			bitrate: "1310",
+            			file: "cg4V7TQw-5RGjFAQM-364802.mp4",
+            			width: "720"
+            		}, {
+            			bitrate: "810",
+            			file: "cg4V7TQw-5RGjFAQM-364801.mp4",
+            			width: "480"
+            		}, {
+            			bitrate: "520",
+            			file: "cg4V7TQw-5RGjFAQM-364800.mp4",
+            			width: "320"
+            		}],
+            		title: "Bunny",
+            		image: "http://thumbs.bitsontherun.com/5RGjFAQM.jpg",
+            		type: "RTMP",
+            		streamer: "rtmp://sarzsmiotvm99.cloudfront.net/cfx/st"
+            	}, {
+            		levels: [{
+            			bitrate: "380",
+            			file: "cg4V7TQw-ajuWPle1-364801.mp4",
+            			width: "480"
+            		}, {
+            			bitrate: "270",
+            			file: "cg4V7TQw-ajuWPle1-364800.mp4",
+            			width: "320"
+            		}],
+            		title: "Black Hole",
+            		image: "http://thumbs.bitsontherun.com/ajuWPle1.jpg",
+            		type: "RTMP",
+            		streamer: "rtmp://sarzsmiotvm99.cloudfront.net/cfx/st"
+            	}, {
+            		levels: [{
+            			bitrate: "2020",
+            			file: "cg4V7TQw-5RGjFAQM-364803.mp4",
+            			width: "1080"
+            		}, {
+            			bitrate: "1310",
+            			file: "cg4V7TQw-5RGjFAQM-364802.mp4",
+            			width: "720"
+            		}, {
+            			bitrate: "810",
+            			file: "cg4V7TQw-5RGjFAQM-364801.mp4",
+            			width: "480"
+            		}, {
+            			bitrate: "520",
+            			file: "cg4V7TQw-5RGjFAQM-364800.mp4",
+            			width: "320"
+            		}],
+            		title: "Bunny",
+            		image: "http://thumbs.bitsontherun.com/5RGjFAQM.jpg",
+            		type: "RTMP",
+            		streamer: "rtmp://sarzsmiotvm99.cloudfront.net/cfx/st"
+            	}, {
+            		levels: [{
+            			bitrate: "380",
+            			file: "cg4V7TQw-ajuWPle1-364801.mp4",
+            			width: "480"
+            		}, {
+            			bitrate: "270",
+            			file: "cg4V7TQw-ajuWPle1-364800.mp4",
+            			width: "320"
+            		}],
+            		title: "Black Hole",
+            		image: "http://thumbs.bitsontherun.com/ajuWPle1.jpg",
+            		type: "RTMP",
+            		streamer: "rtmp://sarzsmiotvm99.cloudfront.net/cfx/st"
+            	}],
+            	mixed: [{
+            		levels: [{
+            			file: "http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4"
+            		}, {
+            			file: "http://content.bitsontherun.com/videos/gSzpo2wh-604476.ogv"
+            		}],
+            		title: "Bunny Progressive",
+            		image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg"
+            	}, {
+            		levels: [{
+            			bitrate: "380",
+            			file: "cg4V7TQw-ajuWPle1-364801.mp4",
+            			width: "480"
+            		}, {
+            			bitrate: "270",
+            			file: "cg4V7TQw-ajuWPle1-364800.mp4",
+            			width: "320"
+            		}],
+            		title: "Black Hole RTMP",
+            		image: "http://thumbs.bitsontherun.com/ajuWPle1.jpg",
+            		type: "RTMP",
+            		streamer: "rtmp://sarzsmiotvm99.cloudfront.net/cfx/st"
+            	}, {
+            		levels: [{
+            			file: "http://content.bitsontherun.com/videos/guYqV1AB-486405.mp4"
+            		}, {
+            			file: "http://content.bitsontherun.com/videos/guYqV1AB-604476.ogv"
+            		}],
+            		title: "Corrie Progressive",
+            		image: "http://content.bitsontherun.com/thumbs/guYqV1AB-480.jpg"
+            	}, {
+            		levels: [{
+            			file: "http://playertest.longtailvideo.com/bunny.mp3"
+            		}, {
+            			file: "http://playertest.longtailvideo.com/bunny.ogg"
+            		}],
+            		title: "Bunny Audio",
+            		image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg"
+            	},{
+                	levels: [{
+                		file: "http://youtube.com/watch?v=IBTE-RoMsvw"
+                	}],
+            		title: "Bunny YouTube",
+            		image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg"
+				}]
+            };
+            var playlist = playlists[type];
+        </script>
+        <script type="text/javascript">
+            document.write("<h1>" + document.title + "</h1>");
+        </script>
+        <p>
+            This page is meant to test playlists with various playlist related config options. For now, all of them use the same playlist.
+        </p>
+        <p>
+            It contains three players with multiple sources, so it should play back in IE9, FF, Chrome, Safari, and Opera. IE < 9 will simply display "HTML5 Player should replace this".
+        </p>
+        
+	  <p>Select a rendering mode: <select id="renderer">
+	    <option value="flashonly">
+	      Flash Only
+	    </option>
+	
+	    <option value="html5only" selected="selected">
+	      HTML5 Only
+	    </option>
+	  </select> <button id="go" onclick="setupAll()">Go</button></p>
+        
+        <p>
+            The standard playlist
+        </p>
+        <div height="270" id="player1" width="480">
+            HTML5 Player should replace this
+        </div>
+        <script type="text/javascript">
+
+        </script>
+        <p>
+            Continuously repeat with shuffle on
+        </p>
+        <div height="270" id="player2" width="480">
+            HTML5 Player should replace this
+        </div>
+        <script type="text/javascript">
+        </script>
+        <p>
+            Play through once and stop after playing the last item
+        </p>
+        <div height="270" id="player3" width="480">
+            HTML5 Player should replace this
+        </div>
+        <script type="text/javascript">
+        </script>
+        <p>
+            Go to a specific item
+        </p>
+        <div height="270" id="player4" width="480">
+            HTML5 Player should replace this
+        </div>
+        <script type="text/javascript">
+        </script>
+        <a href="#" onclick="jwplayer('player4').playlistItem(0);return false;">Play item 1</a>
+        <a href="#" onclick="jwplayer('player4').playlistItem(1);return false;">Play item 2</a>
+        <a href="#" onclick="jwplayer('player4').playlistItem(2);return false;">Play item 3</a>
+        <p>
+            Get the current item.
+        </p>
+        <div height="270" id="player4b" width="480">
+            HTML5 Player should replace this
+        </div>
+        <script type="text/javascript">
+
+        </script>
+        <p>Current item = <span id="current_item">0</span></p>
+        <p>
+            Playlist + Playlist.position
+        </p>
+        <div height="270" id="player5" width="480">
+            HTML5 Player should replace this
+        </div>
+        <script type="text/javascript">
+        	function setupAll() { 
+        	  	var mode = document.getElementById('renderer').value;
+        	  	if (!mode) mode = "standard";
+
+        	  	jwplayer("player1").setup( {
+        	  		modes: settings.modes[mode],
+		    		playlist : playlist,
+		    		"playlist.position" : "right",
+		    		"playlist.size" : 300,
+		    		width : 800
+		    	});
+		    	
+		    	jwplayer("player2").setup( {
+			  		modes: settings.modes[mode],
+		    		playlist : playlist,
+		    		repeat : "always",
+		    		shuffle : true,
+		    		"playlist.position" : "right",
+		    		"playlist.size" : 300,
+		    		width : 800
+		    	});
+		    	
+		    	jwplayer("player3").setup( {
+			  		modes: settings.modes[mode],
+		    		playlist : playlist,
+		    		repeat : "list",
+		    		"playlist.position" : "right",
+		    		"playlist.size" : 300,
+		    		width : 800
+		    	});
+		    	
+		    	jwplayer("player4").setup( {
+			  		modes: settings.modes[mode],
+		    		playlist : playlist,
+		    		"playlist.position" : "right",
+		    		"playlist.size" : 300,
+		    		width : 800
+		    	});
+		    	
+		    	jwplayer("player4b").setup( {
+			  		modes: settings.modes[mode],
+		    		playlist : playlist,
+		    		"playlist.position" : "right",
+		    		"playlist.size" : 300,
+		    		width : 800
+		    	});
+		    	
+		    	jwplayer("player4b").onPlaylistItem(
+	    			function() {
+	    				document.getElementById("current_item").innerHTML = this.getPlaylistItem().index;
+	    			}
+		    	);
+	
+		    	jwplayer("player5").setup( {
+			  		modes: settings.modes[mode],
+		    		playlist : playlist,
+		    		"playlist.position" : "right",
+		    		"playlist.size" : 300,
+		    		width : 800
+		    	});
+        	}
+
+        	setupAll();
+	        </script>
+        <h3>HTML code</h3>
+    </body>
+</html>

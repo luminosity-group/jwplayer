@@ -1,0 +1,168 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <title>Listeners</title>
+        <script type="text/javascript" src="../../bin-debug/jwplayer.js">
+        </script>
+        <script type="text/javascript" src="settings.js">
+        </script>
+    </head>
+    <body>
+        <script type="text/javascript">
+            document.write("<h1>" + document.title + "</h1>");
+        </script>
+        <p>
+            This tests adding listeners to the player and responding to events. Video should play on FF, Chrome, Safari, and Opera but will fail in IE.
+        </p>
+        <div height="270" id="player" width="480">
+        </div>
+        <h2>Events</h2>
+        <p>
+            <table id="events">
+                <tr>
+                    <td>
+                        Event
+                    </td>
+                    <td>
+                        Value
+                    </td>
+                </tr>
+            </table>
+        </p>
+        <script type="text/javascript">
+            // Borrowed from http://www.openjs.com/scripts/others/dump_function_php_print_r.php
+            function dump(arr, level) {
+            	var dumped_text = "";
+            	if (!level) 
+            		level = 0;
+            	
+            	//The padding given at the beginning of the line.
+            	var level_padding = "";
+            	for (var j = 0; j < level + 1; j++) 
+            		level_padding += "    ";
+            	
+            	if (typeof(arr) == 'object') { //Array/Hashes/Objects 
+            		for (var item in arr) {
+            			var value = arr[item];
+            			
+            			if (typeof(value) == 'object') { //If it is an array,
+            				dumped_text += level_padding + "'" + item + "' ...\n";
+            				dumped_text += dump(value, level + 1);
+            			} else {
+            				dumped_text += level_padding + "'" + item + "' => \"" + value + "\"\n";
+            			}
+            		}
+            	} else { //Stings/Chars/Numbers etc.
+            		dumped_text = "===>" + arr + "<===(" + typeof(arr) + ")";
+            	}
+            	return dumped_text;
+            }
+            
+            
+            jwplayer("player").setup({
+            	players: settings.players(window.location.href),
+            	levels: [{
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4"
+            	}, {
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-604476.ogv"
+            	}],
+            	image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg"
+            });
+            
+            function forward(id) {
+            	return function(evt) {
+            		if (window.console && console.log) console.log(evt);
+            		var result = "";
+            		var properties = events[id];
+            		if (jwplayer.utils.typeOf(properties) == "string") {
+            			result += "Event recieved - no properties";
+            		} else {
+            			for (var property in properties) {
+            				if (jwplayer.utils.typeOf(evt[property])  == properties[property]) {
+            					result += property + ": " + evt[property] + "<br />";
+            				} else {
+            					result += "<em>" + property + ": " + evt[property] + "</em> - " + jwplayer.utils.typeOf(evt[property]) + "<br />";
+            				}
+            			}
+            		}
+            		//result += dump(evt) + "<br />";
+            		document.getElementById(id).innerHTML = result;
+            	};
+            }
+            
+            
+            var events = {
+            	"onBufferChange": {
+            		"bufferPercent": "number"
+            	},
+            	"onBufferFull": "",
+            	"onError": {
+            		"message": "string"
+            	},
+            	"onFullscreen": {
+            		"fullscreen": "boolean"
+            	},
+            	"onMeta": {
+            		"metadata": "object"
+            	},
+            	"onMute": {
+            		"mute": "boolean"
+            	},
+            	"onPlaylist": {
+            		"playlist": "array"
+            	},
+            	"onPlaylistItem": {
+            		"index": "number"
+            	},
+            	"onReady": "",
+            	"onResize": {
+            		"width": "number",
+            		"height": "number"
+            	},
+            	"onPlay": {
+            		"oldstate": "string",
+            		"newstate": "string"
+            	},
+            	"onPause": {
+            		"oldstate": "string",
+            		"newstate": "string"
+            	},
+            	"onSeek": {
+            		"position": "string",
+            		"offset": "string"
+            	},
+            	"onBuffer": {
+            		"oldstate": "string",
+            		"newstate": "string"
+            	},
+            	"onIdle": {
+            		"oldstate": "string",
+            		"newstate": "string"
+            	},
+            	"onComplete": "",
+            	"onTime": {
+            		"duration": "number",
+            		"position": "number"
+            	},
+            	"onVolume": {
+            		"volume": "number"
+            	}
+            };
+            
+            var table = document.getElementById("events");
+            
+            for (var event in events) {
+            	var row = document.createElement("tr");
+            	var eventNameColumn = document.createElement("td");
+            	eventNameColumn.innerHTML = event;
+            	var eventValueColumn = document.createElement("td");
+            	eventValueColumn.id = event;
+            	row.appendChild(eventNameColumn);
+            	row.appendChild(eventValueColumn);
+            	table.appendChild(row);
+            	jwplayer("player")[event](forward(event));
+            }
+        </script>
+        <h3>HTML code</h3>
+    </body>
+</html>

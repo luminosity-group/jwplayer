@@ -1,0 +1,174 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <title>Play() Unit Tester</title>
+        <script type="text/javascript" src="../../bin-debug/jwplayer.js">
+        </script>
+        <script type="text/javascript" src="settings.js">
+        </script>
+    </head>
+    <body>
+        <script type="text/javascript">
+            document.write("<h1>" + document.title + "</h1>");
+        </script>
+        <p>
+            This tests adding listeners to the player and responding to events. Video should play on FF, Chrome, Safari, and Opera but will fail in IE 8 and below.
+        </p>
+        <p>
+        	This test should also fail in iOS, since volume is not settable via JavaScript for iOS devices.
+        </p>
+        <div height="270" id="player" width="480">
+        </div>
+        <h2>Result</h2>
+        <p id="result">
+            Running...
+        </p>
+        <script type="text/javascript">
+            jwplayer("player").setup({
+            	players: settings.players(window.location.href),
+            	levels: [{
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4"
+            	}, {
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-604476.ogv"
+            	}],
+            	image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg"
+            });
+            
+            var scriptPos = -1;
+            jwplayer().onTime(startScript);
+            jwplayer().play();
+            
+            var script = [{
+            	action: function() {
+            	},
+            	getter: function() {
+            		return jwplayer().getState();
+            	},
+            	expectedValue: jwplayer.api.events.state.PLAYING
+            },{
+            	action: function() {
+            		jwplayer().play();
+            	},
+            	getter: function() {
+            		return jwplayer().getState();
+            	},
+            	expectedValue: jwplayer.api.events.state.PAUSED
+            }, {
+            	action: function() {
+            		jwplayer().play();
+            	},
+            	getter: function() {
+            		return jwplayer().getState();
+            	},
+            	expectedValue: jwplayer.api.events.state.PLAYING
+            }, {
+            	action: function() {
+            		jwplayer().play();
+            	},
+            	getter: function() {
+            		return jwplayer().getState();
+            	},
+            	expectedValue: jwplayer.api.events.state.PAUSED
+            }, {
+            	action: function() {
+            		jwplayer().play();
+            	},
+            	getter: function() {
+            		return jwplayer().getState();
+            	},
+            	expectedValue: jwplayer.api.events.state.PLAYING
+            }, {
+            	action: function() {
+            		jwplayer().play("false");
+            	},
+            	getter: function() {
+            		return jwplayer().getState();
+            	},
+            	expectedValue: jwplayer.api.events.state.PAUSED
+            }, {
+            	action: function() {
+            		jwplayer().play("false");
+            	},
+            	getter: function() {
+            		return jwplayer().getState();
+            	},
+            	expectedValue: jwplayer.api.events.state.PAUSED
+            }, {
+            	action: function() {
+            		jwplayer().play("true");
+            	},
+            	getter: function() {
+            		return jwplayer().getState();
+            	},
+            	expectedValue: jwplayer.api.events.state.PLAYING
+            }, {
+            	action: function() {
+            		jwplayer().play("true");
+            	},
+            	getter: function() {
+            		return jwplayer().getState();
+            	},
+            	expectedValue: jwplayer.api.events.state.PLAYING
+            }, {
+            	action: function() {
+            		jwplayer().play(false);
+            	},
+            	getter: function() {
+            		return jwplayer().getState();
+            	},
+            	expectedValue: jwplayer.api.events.state.PAUSED
+            }, {
+            	action: function() {
+            		jwplayer().play(false);
+            	},
+            	getter: function() {
+            		return jwplayer().getState();
+            	},
+            	expectedValue: jwplayer.api.events.state.PAUSED
+            }, {
+            	action: function() {
+            		jwplayer().play(true);
+            	},
+            	getter: function() {
+            		return jwplayer().getState();
+            	},
+            	expectedValue: jwplayer.api.events.state.PLAYING
+            }, {
+            	action: function() {
+            		jwplayer().play(true);
+            	},
+            	getter: function() {
+            		return jwplayer().getState();
+            	},
+            	expectedValue: jwplayer.api.events.state.PLAYING
+            }];
+            
+            function startScript() {
+            	if (scriptPos == -1) {
+            		scriptPos++;
+            		runScript();
+            	}
+            }
+            
+            
+            function runScript() {
+            	if (scriptPos == script.length) {
+					jwplayer().stop();
+            		document.getElementById("result").innerHTML = "Success!";
+            		return;
+            	}
+            	script[scriptPos].action();
+            	if (script[scriptPos].getter() == script[scriptPos].expectedValue) {
+					document.getElementById("result").innerHTML = Math.round((scriptPos / script.length) * 100) + "% complete";
+            		scriptPos++;
+            		setTimeout(function() {
+            			runScript();
+            		}, 250);
+            	} else {
+            		document.getElementById("result").innerHTML = "Error at step " + (scriptPos + 1) + ": Got " + script[scriptPos].getter() + " and expected " + script[scriptPos].expectedValue;
+            	}
+            }
+        </script>
+        <h3>HTML code</h3>
+    </body>
+</html>

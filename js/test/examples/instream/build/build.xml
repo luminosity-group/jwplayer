@@ -1,0 +1,16 @@
+<project name="Plugin" default="buildAS">
+
+    <target name="buildAS">
+        <exec executable="/Developer/SDKs/flex_sdk_4/bin/mxmlc" dir="../">
+            <arg line="InStreamAdPlugin.as" />
+            <arg line="-o instreamads.swf" />
+            <arg line="-external-library-path+=../../../../bin-release/sdk/lib" />
+            <arg line="-static-link-runtime-shared-libraries=true" />
+            <arg line="-use-network=false" />
+            <arg line="-optimize=true" />
+            <arg line="-incremental=false" />
+        </exec>
+        <echo message="Compiled SWF plugin." />
+    </target>
+
+</project>

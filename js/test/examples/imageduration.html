@@ -1,0 +1,43 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <title>Feature: image.duration</title>
+        <script type="text/javascript" src="../../bin-debug/jwplayer.js">
+        </script>
+        <script type="text/javascript" src="settings.js"></script>
+    </head>
+    <body>
+        <script type="text/javascript">
+            document.write("<h1>" + document.title + "</h1>");
+            
+            var playlistObj = [{
+            		file: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg",
+	           	}, {
+            		file: "http://content.bitsontherun.com/thumbs/DMJODX8R-480.jpg",
+            	}, {
+            		file: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg",
+            	}, {
+            		file: "http://content.bitsontherun.com/thumbs/guYqV1AB-480.jpg",
+            	}, {
+            		file: "http://content.bitsontherun.com/thumbs/DMJODX8R-480.jpg",
+            	}];
+        </script>
+        <p>
+            This demonstrates setting a default image.duration, for a slide-show style image-only playlist.
+        </p>
+        
+        <div height="270" id="player1" width="480">
+            JW Player should replace this
+       </div>
+
+        <script type="text/javascript">
+           	jwplayer("player1").setup({
+            	modes: settings.modes.flashonly,
+           		playlist: playlistObj,
+           		'image.duration': 1.5,
+           		repeat: 'always',
+           		autostart: true
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <title>API</title>
+        <script type="text/javascript" src="../../bin-debug/jwplayer.js">
+        </script>
+        <script type="text/javascript" src="settings.js">
+        </script>
+    </head>
+    <body>
+        <script type="text/javascript">
+            document.write("<h1>" + document.title + "</h1>");
+        </script>
+
+        <p>Select a rendering mode: 
+          <select id="renderer">
+            <option value="flashonly">
+              Flash Only
+            </option>
+  
+            <option value="html5only" selected="selected">
+              HTML5 Only
+            </option>
+          </select>
+          <button id="go" onclick="setupAll()">Go</button>
+        </p>
+
+        <p>
+            This is the basic setup for a video that plays natively on FF, Chrome, Safari, and Opera but will fail in IE.
+        </p>
+        <div height="270" id="player" width="480">
+        </div>
+        <div style="float:left">
+            <p>
+                Controls
+            </p>
+            <select id="controls">
+            </select>
+			<input type="text" id="controlvalue"/>
+			<a href="#" onclick="callPlayerFunction('controls', 'controlvalue');return false;">Call</a>
+        </div>
+        <div style="float:right">
+            <p>
+                Properties
+            </p>
+            <select id="properties">
+            </select>
+			<a href="#" onclick="callPlayerFunction('properties');return false;">Log value to console</a>
+        </div>
+        <script type="text/javascript">
+        var player;
+        function setupAll() {
+          var mode = document.getElementById("renderer").value;
+    			player = jwplayer("player").setup({
+             	players: settings.modes[mode],
+            	playlist: [{
+            	 levels: [{
+              		file: "http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4"
+              	}, {
+              		file: "http://content.bitsontherun.com/videos/gSzpo2wh-604476.ogv"
+              	}],
+              	image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg",
+              	'foo.bar': '17'
+              }],
+		      		debug: "console"
+            });
+			   }
+			   
+			   setupAll();
+			   
+      			function callPlayerFunction(functionid, valueid){
+      				if (document.getElementById(valueid) && document.getElementById(valueid).value !== "") {
+      					player[document.getElementById(functionid).value](document.getElementById(valueid).value);
+      				} else {
+      					if (window.console && console.log) console.log(player[document.getElementById(functionid).value]());
+      				}
+      			}
+            
+            var controls = {
+            	Play: "play",
+            	Pause: "pause",
+            	Stop: "stop",
+            	Seek: "seek",
+            	Item: "playlistItem",
+            	Next: "playlistNext",
+            	Previous: "playlistPrev",
+            	Resize: "resize",
+            	Load: "load",
+            	Volume: "setVolume",
+            	Mute: "setMute",
+            	Fullscreen: "setFullscreen"
+//            	"Add Listener": "jwAddEventListener",
+//            	"Remove Listener": "jwRemoveEventListener",
+ //           	"Send Event": "jwSendEvent"
+            };
+            
+            var properties = {
+            	State: "getState",
+            	Item: "getItem",
+            	Width: "getWidth",
+            	Height: "getHeight",
+            	Volume: "getVolume",
+            	Mute: "getMute",
+            	Position: "getPosition",
+            	Duration: "getDuration",
+            	Buffer: "getBuffer",
+            	Fullscreen: "getFullscreen",
+            	Playlist: "getPlaylist"
+            };
+			
+			for (var control in controls){
+				var listItem = document.createElement("option");
+				listItem.value = controls[control];
+				listItem.innerHTML = control;
+				document.getElementById('controls').appendChild(listItem);
+			}
+			
+			for (var property in properties){
+				var listItem = document.createElement("option");
+				listItem.value = properties[property];
+				listItem.innerHTML = property;
+				document.getElementById('properties').appendChild(listItem);
+			}
+        </script>
+        <h3>HTML code</h3>
+    </body>
+</html>

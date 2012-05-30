@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <title>getPlugin("dock").setButton</title>
+        <style type="text/css">
+            body {
+                background-color: #eee;
+                padding: 40px;
+                font-family: Arial;
+            }
+        </style>
+        <script type="text/javascript" src="../../bin-debug/jwplayer.js">
+        </script>
+        <script type="text/javascript" src="settings.js">
+        </script>
+    </head>
+    <body>
+        <h2>getPlugin("dock").setButton</h2>
+        <div id="container">
+        </div>
+        <script type="text/javascript">
+        	var config = {
+            	levels: [{
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4"
+            	}, {
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-604476.ogv"
+            	}],
+            	file: "foo.mp4",
+            	height: 270,
+            	image: 'http://content.bitsontherun.com/thumbs/nPripu9l-480.jpg',
+            	width: 480
+            }
+			if (document.location.href.indexOf("?flash") > -1){
+				config.players = settings.players(window.location.href, ["flash", "download"])
+			}
+			if (document.location.href.indexOf("?html5") > -1){
+				config.players = settings.players(window.location.href, ["html5", "flash", "download"])
+			}
+            jwplayer("container").setup(config);
+            var index = 0;
+            var over = false;
+            var player = jwplayer("container");
+            player.onReady(function(obj){
+				toggleLights();
+			});
+            function toggleLights() {
+            	if (over) {
+            		over = false;
+            		player.getPlugin("dock").setButton("lightsoff", toggleLights, "assets/dock_on_out.png", "assets/dock_on_over.png");
+            	} else {
+            		over = true;
+            		player.getPlugin("dock").setButton("lightsoff", toggleLights, "assets/dock_off_out.png", "assets/dock_off_over.png");
+            	}
+            };
+            function changeClick() {
+				var name = "button" + index;
+            	player.getPlugin("dock").setButton("lightsoff", function() {
+					setAlert(name);
+				});
+            };
+            function changeClickImage() {
+				var name = "button" + index;
+            	player.getPlugin("dock").setButton("lightsoff", function() {
+					setAlert(name);
+				}, "assets/dock_off_over.png");
+            };
+            function addButton() {
+            	index++;
+            	var name = "button" + index;
+            	var dock = player.getPlugin("dock");
+            	dock.setButton(name, function() {
+					setAlert(name);
+				}, "assets/dock_on_out.png");
+            };
+            function removeButton() {
+            	var name = "button" + index;
+            	player.getPlugin("dock").setButton(name);
+            	index--;
+            };
+            function setAlert(name) {
+            	alert("button \"" + name + "\" was clicked");
+            };
+        </script>
+        <ul>
+            <li>
+                <a href="javascript:changeClick()">Change button click</a>
+            </li>
+            <li>
+                <a href="javascript:changeClickImage()">Change button click and images</a>
+            </li>
+            <li>
+                <a href="javascript:addButton()">Add another button</a>
+            </li>
+            <li>
+                <a href="javascript:removeButton()">Remove added button</a>
+            </li>
+        </ul>
+    </body>
+</html>

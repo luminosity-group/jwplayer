@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <title>Single MP4 Example</title>
+        <script type="text/javascript" src="../../bin-debug/jwplayer.js">
+        </script>
+        <script type="text/javascript" src="settings.js">
+        </script>
+    </head>
+    <body>
+        <script type="text/javascript">
+            document.write("<h1>" + document.title + "</h1>");
+        </script>
+        <p>
+            This page demonstrates the new tabbing behavior in Flash, which should be useful for keyboard users and screen readers.  Tabbing into the player doesn't work in all browsers.
+        </p>
+        
+        <p>Here is a <a href="#">link</a> that goes before the players.</p>
+        
+        <div id="player">
+        	Flash Player should replace this
+        </div>
+        
+         <p>Here is a <a href="#">link</a> that goes between the players.</p>
+
+        <div id="player2">
+        	Flash Player should replace this
+        </div>
+
+         <p>Here is a <a href="#">link</a> that goes after the players.</p>
+        
+        <script type="text/javascript">
+            jwplayer("player").setup({
+            	players: settings.players(window.location.href, ["flash","html5"]),
+            	levels: [{
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4"
+            	}, {
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-604476.ogv"
+            	}],
+            	image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg",
+            	height: "270",
+            	width: "480",
+            	plugins: {
+            	   "sharing-1": {
+            	       code: "Sharing code",
+            	       link: "http://www.google.com"   
+            	   }  
+            	}
+            });
+
+            jwplayer("player2").setup({
+            	players: settings.players(window.location.href, ["flash","html5"]),
+            	levels: [{
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4"
+            	}, {
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-604476.ogv"
+            	}],
+            	image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg",
+            	height: "270",
+            	width: "480",
+            	skin: "http://playertest.longtailvideo.com/glow.zip",
+            	plugins: {
+            	   "sharing-1": {
+            	       code: "Sharing code",
+            	       link: "http://www.google.com"   
+            	   }  
+            	}
+            });
+        </script>
+        <h3>HTML code</h3>
+    </body>
+</html>

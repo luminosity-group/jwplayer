@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <title>Display.showmute</title>
+        <script type="text/javascript" src="../../bin-debug/jwplayer.js">
+        </script>
+        <script type="text/javascript" src="settings.js">
+        </script>
+    </head>
+    <body>
+        <script type="text/javascript">
+            document.write("<h1>" + document.title + "</h1>");
+        </script>
+        <p>
+            This page demonstrates the new <em>display.showmute</em> option, which shows the mute icon in the display when the player is muted (this used to be the default).
+        </p>
+       
+        <h3>Flash, display.showmute=true<h3>
+
+	<div id="player">
+        	JW Player should replace this
+        </div>
+        
+        <h3>HTML5, display.showmute=true</h3>
+
+        <div id="player2">
+        	JW Player should replace this
+        </div>
+
+        <h3>Flash, display.showmute=false<h3>
+
+	<div id="player3">
+        	JW Player should replace this
+        </div>
+        
+        <h3>HTML5, display.showmute=false</h3>
+
+        <div id="player4">
+        	JW Player should replace this
+        </div>
+
+         <p>Here is a <a href="#">link</a> that goes after the players.</p>
+        
+        <script type="text/javascript">
+            jwplayer("player").setup({
+            	players: settings.players(window.location.href, ["flash","html5"]),
+            	file: "http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4",
+            	image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg",
+		'display.showmute': true,
+		mute: true,
+            	height: "270",
+            	width: "480"
+            });
+
+            jwplayer("player2").setup({
+            	players: settings.players(window.location.href, ["html5","flash"]),
+            	file: "http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4",
+            	image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg",
+		'display.showmute': true,
+		mute: true,
+            	height: "270",
+            	width: "480"
+            });
+
+		jwplayer("player3").setup({
+            	players: settings.players(window.location.href, ["html5","flash"]),
+            	file: "http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4",
+            	image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg",
+		'display.showmute': false,
+		mute: true,
+            	height: "270",
+            	width: "480"
+            });
+            
+                        jwplayer("player4").setup({
+            	players: settings.players(window.location.href, ["html5","flash"]),
+            	file: "http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4",
+            	image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg",
+		'display.showmute': false,
+		mute: true,
+            	height: "270",
+            	width: "480"
+            });
+            
+</script>
+        <h3>HTML code</h3>
+    </body>
+</html>

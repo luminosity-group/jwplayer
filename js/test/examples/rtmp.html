@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <title>RTMP</title>
+        <script type="text/javascript" src="../../bin-debug/jwplayer.js">
+        </script>
+        <script src="https://www.google.com/jsapi?key=ABQIAAAAmW4wY4GLARKwRKxx1EY4dxTCwYuWkdD_iTnqF3uxU7_DebvfxBREab8CD-MRcuvG-IzP2uSZrQpweg" type="text/javascript">
+        </script>
+        <script language="Javascript" type="text/javascript">
+            google.load("ext-core", "3");
+            google.load("dojo", "1");
+            google.load("prototype", "1");
+            google.load("mootools", "1.3.0");
+        </script>
+        <script type="text/javascript" src="settings.js">
+        </script>
+    </head>
+    <body>
+        <script type="text/javascript">
+            document.write("<h1>" + document.title + "</h1>");
+        </script>
+        <p>
+            This test the various configuration options for plugins. Video should play natively on FF, Chrome, Safari, and Opera but will fail in IE.
+        </p>
+        <div id="examplestable">
+        </div>
+        <script type="text/javascript">
+            var examplestable = document.getElementById("examplestable");
+            var players = [["flash", "html5", "download"], ["flash", "download"], ["html5", "download"]];
+            var tests = [{
+            	name: "Standard RTMP stream, no provider",
+            	config: {
+            		file: "videos/Qvxp3Jnv-483.mp4",
+            		streamer: "rtmp://fms.12E5.edgecastcdn.net/0012E5",
+            		image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg"
+            	}
+            }, {
+            	name: "Standard RTMP stream, provider",
+            	config: {
+            		file: "videos/Qvxp3Jnv-483.mp4",
+            		streamer: "rtmp://fms.12E5.edgecastcdn.net/0012E5",
+            		image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg",
+            		provider: "RTMP"
+            	}
+            }, {
+            	name: "RTMP dynamic stream",
+            	config: {
+            		file: "http://playertest.longtailvideo.com/dynamic.xml",
+            		image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg",
+            		height: 240,
+            		width: 500,
+            		bufferlength: 5,
+            		plugins: 'qualitymonitor'
+            	}
+            }, {
+            	name: "RTMP loadbalanced",
+            	config: {
+            		image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg",
+            		file: 'http://hwcdn.net/i6s8g7u7/fms/dynamic/8Juv1MVa-484.mp4',
+            		provider: 'rtmp',
+            		height: 240,
+            		width: 500,
+            		bufferlength: 5,
+            		'rtmp.loadbalance': true
+            	}
+            }, {
+            	name: "RTMP loadbalanced dynamic stream",
+            	config: {
+            		file: "http://playertest.longtailvideo.com/dynamic.smil",
+            		image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg",
+            		height: 240,
+            		width: 500,
+            		bufferlength: 5,
+            		provider: 'rtmp',
+            		'rtmp.loadbalance': true
+            	}
+            }, {
+            	name: "RTMP livestream",
+            	config: {
+            		image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg",
+            		file: 'tuxcast',
+            		streamer: 'rtmp://fml.12E5.edgecastcdn.net/2012E5/',
+            		'rtmp.subscribe': true,
+            		height: 240,
+            		width: 500
+            	}
+            }, {
+            	name: "RTMP livestream + DVR",
+            	config: {
+            		image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg",
+            		plugins: 'qualitymonitor',
+            		file: 'tuxcast',
+            		'rtmp.dvr': true,
+            		streamer: 'rtmp://fml.12E5.edgecastcdn.net/3012E5/',
+            		height: 240,
+            		width: 500
+            	}
+            }];
+            
+            for (var test in tests) {
+            	if (isNaN(test)) {
+            		break;
+            	}
+            	var row = document.createElement("div");
+            	examplestable.appendChild(row);
+            	var label = document.createElement("p");
+            	row.appendChild(label);
+            	var labelTag = document.createElement("h2");
+            	label.appendChild(labelTag);
+            	labelTag.innerHTML = tests[test].name;
+            	for (var player in players) {
+            		if (isNaN(player)) {
+            			break;
+            		}
+            		var column = document.createElement("span");
+            		row.appendChild(column);
+            		var div = document.createElement("div");
+            		column.appendChild(div);
+            		var playerName = ("player-" + tests[test].name + "-" + players[player].join("-")).replace(/[^A-Za-z0-9\-\_]/g, "").toLowerCase();
+            		div.id = playerName;
+            		div.height = 270;
+            		div.width = 480;
+            		var config = jwplayer.utils.extend({
+            			name: playerName,
+            			players: settings.players(window.location.href, players[player])
+            		}, tests[test].config);
+            		var setup = jwplayer(playerName).setup(config);
+            	}
+            }
+        </script>
+        <h3>HTML code</h3>
+    </body>
+</html>

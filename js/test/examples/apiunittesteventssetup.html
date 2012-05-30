@@ -1,0 +1,250 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <title>Events Unit Tester</title>
+        <script type="text/javascript" src="../../bin-debug/jwplayer.js">
+        </script>
+        <script type="text/javascript" src="settings.js">
+        </script>
+    </head>
+    <body>
+        <script type="text/javascript">
+            document.write("<h1>" + document.title + "</h1>");
+        </script>
+        <p>
+            This tests adding listeners to the player and responding to events. Video should play on FF, Chrome, Safari, and Opera but will fail in IE.
+        </p>
+        <div height="270" id="player" width="480">
+        </div>
+        <h2>Result</h2>
+        <p id="result">
+            Running...
+        </p>
+        <script type="text/javascript">
+        	            var events = {
+            	"onBufferChange": {
+            		"bufferPercent": "number"
+            	},
+            	"onBufferFull": "",
+            	"onError": {
+            		"message": "string"
+            	},
+            	"onFullscreen": {
+            		"fullscreen": "boolean"
+            	},
+            	"onMeta": {
+            		"metadata": "object"
+            	},
+            	"onMute": {
+            		"mute": "boolean"
+            	},
+            	"onPlaylist": {
+            		"playlist": "array"
+            	},
+            	"onPlaylistItem": {
+            		"index": "number"
+            	},
+            	"onReady": "",
+            	"onResize": {
+            		"width": "number",
+            		"height": "number"
+            	},
+            	"onPlay": {
+            		"oldstate": "string",
+            		"newstate": "string"
+            	},
+            	"onPause": {
+            		"oldstate": "string",
+            		"newstate": "string"
+            	},
+            	"onBuffer": {
+            		"oldstate": "string",
+            		"newstate": "string"
+            	},
+            	"onIdle": {
+            		"oldstate": "string",
+            		"newstate": "string"
+            	},
+            	"onComplete": "",
+            	"onTime": {
+            		"duration": "number",
+            		"position": "number"
+            	},
+            	"onVolume": {
+            		"volume": "number"
+            	}
+            };
+            
+			var setupEvents = {};
+			
+            for (var event in events) {
+            	setupEvents[event] = forward(event);
+            }
+            if (window.console && console.log) console.log(setupEvents);
+			
+            jwplayer("player").setup({
+            	players: settings.players(window.location.href),
+            	levels: [{
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4"
+            	}, {
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-604476.ogv"
+            	}],
+            	image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg",
+            	mute: false,
+				events: setupEvents
+            });
+            
+            var success = true;
+            var fired = {};
+            
+            function forward(id) {
+            	return function(evt) {
+            		fired[id] = true;
+            		var properties = events[id];
+            		if (jwplayer.utils.typeOf(properties) == "string") {
+            		} else {
+            			for (var property in properties) {
+            				if (jwplayer.utils.typeOf(evt[property]) != properties[property]) {
+            					success = false;
+            				}
+            			}
+            		}
+            	};
+            }
+            
+            var scriptPos = -1;
+            jwplayer().onTime(startScript);
+            jwplayer().onComplete(completeScript);
+            if (!jwplayer.utils.isIOS()) {
+	            jwplayer().play();
+            }
+            
+            var script = [{
+            	action: function() {
+            	},
+            	getter: function() {
+            		return jwplayer().getState();
+            	},
+            	expectedValue: jwplayer.api.events.state.PLAYING
+            }, {
+            	action: function() {
+            		jwplayer().pause();
+            	},
+            	getter: function() {
+            		return success;
+            	},
+            	expectedValue: true
+            }, {
+            	action: function() {
+            		jwplayer().play();
+            	},
+            	getter: function() {
+            		return success;
+            	},
+            	expectedValue: true
+            }, {
+            	action: function() {
+            		jwplayer().setMute();
+            	},
+            	getter: function() {
+            		return success;
+            	},
+            	expectedValue: true
+            }, {
+            	action: function() {
+            		jwplayer().setFullscreen();
+            	},
+            	getter: function() {
+            		return success;
+            	},
+            	expectedValue: true
+            }, {
+            	action: function() {
+            		jwplayer().setFullscreen();
+            	},
+            	getter: function() {
+            		return success;
+            	},
+            	expectedValue: true
+            }, {
+            	action: function() {
+            		jwplayer().setVolume(10);
+            	},
+            	getter: function() {
+            		return success;
+            	},
+            	expectedValue: true
+            }, {
+            	action: function() {
+            		jwplayer().seek(31);
+            	},
+            	getter: function() {
+            		return success;
+            	},
+            	expectedValue: true
+            }];
+            
+            function startScript() {
+            	if (scriptPos == -1) {
+            		scriptPos++;
+            		runScript();
+            	}
+            }
+            
+            
+            function runScript() {
+            	if (scriptPos == script.length) {
+            		return;
+            	}
+            	script[scriptPos].action();
+            	if (script[scriptPos].getter() == script[scriptPos].expectedValue) {
+            		document.getElementById("result").innerHTML = Math.round((scriptPos / script.length) * 100) + "% complete";
+            		scriptPos++;
+            		setTimeout(function() {
+            			runScript();
+            		}, 500);
+            	} else {
+            		document.getElementById("result").innerHTML = "Error at step " + (scriptPos + 1) + ": Got " + script[scriptPos].getter() + " and expected " + script[scriptPos].expectedValue;
+            		if (window.console && console.log) console.log(script[scriptPos].action);
+            	}
+            }
+			
+			function hasFlash(){
+				for (var player in settings.players(window.location.href)){
+					if (settings.players(window.location.href)[player].type.toLowerCase() == "flash"){
+						return true;
+					}
+				}
+				return false;
+			}
+            
+			function eventSkippable(event){
+				return event == "onError" || ((event == "onFullscreen" || event == "onResize") && hasFlash());
+			}
+            
+            function completeScript() {
+            	if (scriptPos == script.length) {
+            		for (var event in events) {
+            			if (typeof event == "string" && (fired[event] || eventSkippable(event))) {
+            				continue;
+            			} else {
+            				success = event;
+            				break;
+            			}
+            		}
+            	} else {
+            		success = false;
+            	}
+            	if (success === true) {
+            		document.getElementById("result").innerHTML = "Success!";
+            	} else if (typeof success == "string"){
+            		document.getElementById("result").innerHTML = success + " was never fired";
+            	} else {
+					document.getElementById("result").innerHTML = "Script was not completed before video playback completed";
+				}
+            	return;
+            }
+        </script>
+        <h3>HTML code</h3>
+    </body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <title>Invalid skin path</title>
+        <script type="text/javascript" src="../../bin-debug/jwplayer.js">
+        </script>
+        <script type="text/javascript" src="settings.js">
+        </script>
+    </head>
+    <body>
+        <script type="text/javascript">
+            document.write("<h1>" + document.title + "</h1>");
+        </script>
+		 <p>
+           This page tests to see the players behavior when it is provided with an invalid path for a skin.
+        </p>
+		 <p>
+           Players should appear in IE9, FF, Chrome, Safari, and Opera, but they will not play. IE < 9 will simply display "HTML5 Player should replace this".
+        </p>
+        <div height="270" id="player" width="480">
+        	 HTML5 Player should replace this.
+        </div>
+        <script type="text/javascript">
+            jwplayer("player").setup({
+            	players: settings.players(window.location.href),
+            	levels: [{
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4"
+            	}, {
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-604476.ogv"
+            	}],
+            	image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg",
+            	skin: "../../../../skins/beelden/beelden1.xml"
+            });
+        </script>
+        <h3>HTML code</h3>
+    </body>
+</html>

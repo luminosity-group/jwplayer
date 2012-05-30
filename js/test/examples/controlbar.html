@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <title>Controlbar</title>
+        <script type="text/javascript" src="../../bin-debug/jwplayer.js">
+        </script>
+        <script type="text/javascript" src="settings.js">
+        </script>
+    </head>
+    <body>
+        <script type="text/javascript">
+            document.write("<h1>" + document.title + "</h1>");
+        </script>
+        <p>
+            This shows all of the rendering options for the controlbar.
+        </p>
+        <p>
+            It contains three players with multiple sources, so it should play back in IE9, FF, Chrome, Safari, and Opera. IE < 9 will simply display "JW Player should replace this".
+        </p>
+        <p>
+          Settings
+          <form>
+            <label>Rendering mode</label>
+            <select id="renderer">
+              <option value="flashonly">Flash Only</option>
+              <option value="html5only" selected="selected">HTML5 Only</option>
+            </select><br/>
+            <label>controlbar.idlehide</label>
+            <select id="idlehide">
+              <option value="true" selected="selected">true</option>
+              <option value="false">false</option>
+            </select><br/>
+            <button id="go" onclick="return setupAll();">Go</button>
+          </form>
+        </p>
+ 
+ <div id="players">
+
+		<p>
+			Controlbar top
+		</p>
+        <div height="270" id="player1" width="480">
+            JW Player should replace this
+        </div>
+		<p>
+			Controlbar over
+		</p>
+        <div height="270" id="player2" width="480">
+            JW Player should replace this
+        </div>
+		<p>
+			Controlbar bottom
+		</p>
+        <div height="270" id="player3" width="480">
+            JW Player should replace this
+        </div>
+        
+		<p>
+			Controlbar none
+		</p>
+        <div height="270" id="player4" width="480">
+            JW Player should replace this
+        </div>
+        
+    </div>        
+    
+        <script type="text/javascript">
+          function setupAll() {
+            var mode = document.getElementById('renderer').value;
+            var idlehide = document.getElementById('idlehide').value;
+            if (!mode) mode = "standard";
+          
+            jwplayer("player1").setup({
+            	modes: settings.modes[mode],
+            	levels: [{
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4"
+            	}, {
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-604476.ogv"
+            	}],
+            	image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg",
+            	"controlbar.position": "top",
+            	"controlbar.idlehide": idlehide
+            });
+
+            jwplayer("player2").setup({
+            	modes: settings.modes[mode],
+            	levels: [{
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4"
+            	}, {
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-604476.ogv"
+            	}],
+            	image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg",
+            	"controlbar.position": "over",
+            	"controlbar.idlehide": idlehide
+            });
+            
+            jwplayer("player3").setup({
+            	modes: settings.modes[mode],
+            	levels: [{
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4"
+            	}, {
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-604476.ogv"
+            	}],
+            	image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg",
+            	"controlbar.position": "bottom",
+            	"controlbar.idlehide": idlehide
+            });
+            
+            jwplayer("player4").setup({
+            	modes: settings.modes[mode],
+            	levels: [{
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4"
+            	}, {
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-604476.ogv"
+            	}],
+            	image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg",
+            	"controlbar.position": "none"
+            });
+            
+            return false;
+          }
+          
+          setupAll();
+        </script>
+        <h3>HTML code</h3>
+    </body>
+</html>

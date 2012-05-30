@@ -1,0 +1,200 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <title>Download Fallback</title>
+        <script type="text/javascript" src="../../bin-debug/jwplayer.js">
+        </script>
+        <script type="text/javascript" src="settings.js">
+        </script>
+    </head>
+    <body>
+        <script type="text/javascript">
+            var playlist = [{
+            	levels: [{
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4"
+            	}, {
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-604476.ogv"
+            	}],
+            	image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg"
+            }, {
+            	levels: [{
+            		file: "http://content.bitsontherun.com/videos/guYqV1AB-486405.mp4"
+            	}, {
+            		file: "http://content.bitsontherun.com/videos/guYqV1AB-604476.ogv"
+            	}],
+            	image: "http://content.bitsontherun.com/thumbs/guYqV1AB-480.jpg"
+            }, {
+            	levels: [{
+            		file: "http://content.bitsontherun.com/videos/DMJODX8R-486405.mp4"
+            	}, {
+            		file: "http://content.bitsontherun.com/videos/DMJODX8R-604476.ogv"
+            	}],
+            	image: "http://content.bitsontherun.com/thumbs/DMJODX8R-480.jpg"
+            }];
+        </script>
+        <script type="text/javascript">
+            document.write("<h1>" + document.title + "</h1>");
+        </script>
+        <p>
+            This is designed to test the download fallback of the player. You perform this test twice: once with Flash enabled in your browser and once with it disabled (if possible). The expected behavior is that all videos should play with Flash enabled and download with Flash disabled (unless otherwise noted).
+        </p>
+        <h2>No file and no image</h2>
+        <div id="player1">
+        </div>
+        <script type="text/javascript">
+            jwplayer("player1").setup({
+            	players: settings.players(window.location.href, ["flash", "download"])            
+            });
+        </script>
+        <h2>No file and an image</h2>
+        <div id="player2">
+        </div>
+        <script type="text/javascript">
+            jwplayer("player2").setup({
+            	image: playlist[0].image,
+            	players: settings.players(window.location.href, ["flash", "download"])            
+            });
+        </script>
+        <h2>Single file (mp4) with no HTML5 mode</h2>
+        <div id="player3">
+        </div>
+        <script type="text/javascript">
+            jwplayer("player3").setup({
+            	file: playlist[0].levels[0].file,
+            	image: playlist[0].image,
+            	players: settings.players(window.location.href, ["flash", "download"])            
+            });
+        </script>
+        <h2>Single file (ogv) with no HTML5 mode</h2>
+        <div id="player4">
+        </div>
+        <p>
+            <em>Note</em>
+            - With Flash enabled, this will not play in any browser. It should simply download in all cases.
+        </p>
+        <script type="text/javascript">
+            jwplayer("player4").setup({
+            	file: playlist[0].levels[1].file,
+            	image: playlist[0].image,
+            	players: settings.players(window.location.href, ["flash", "download"])            
+            });
+        </script>
+        <h2>Single file (mp4) with HTML5 mode</h2>
+        <div id="player5">
+        </div>
+        <script type="text/javascript">
+            jwplayer("player5").setup({
+            	file: playlist[0].levels[0].file,
+            	image: playlist[0].image,
+            	players: settings.players(window.location.href, ["flash", "html5", "download"])            
+            });
+        </script>
+        <h2>Single file (ogv) with HTML5 mode</h2>
+        <div id="player6">
+        </div>
+        <p>
+            <em>Note</em>
+            - With Flash enabled, this will not play in any browser. It should simply download in all cases.
+        </p>
+        <script type="text/javascript">
+            jwplayer("player6").setup({
+            	file: playlist[0].levels[1].file,
+            	image: playlist[0].image,
+            	players: settings.players(window.location.href, ["flash", "html5", "download"])            
+            });
+        </script>
+        <h2>Multiple sources (mp4 and ogv) with no image</h2>
+        <div id="player7">
+        </div>
+        <script type="text/javascript">
+            jwplayer("player7").setup({
+            	levels: playlist[0].levels,
+            	players: settings.players(window.location.href, ["flash", "download"])
+            });
+        </script>
+        <h2>Video tag with one source (mp4)</h2>
+        <video height="270" id="player8" poster="http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg" width="480">
+            <source src="http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4" type="video/mp4" />
+            <p>
+                HTML5 Player should replace this.
+            </p>
+        </video>
+        <script type="text/javascript">
+            jwplayer("player8").setup({
+            	players: settings.players(window.location.href, ["flash", "download"])
+            });
+        </script>
+        <h2>Video tag with one source (ogv)</h2>
+        <video height="270" id="player9" poster="http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg" width="480">
+            <source src="http://content.bitsontherun.com/videos/gSzpo2wh-604476.ogv" type="video/ogg" />
+            <p>
+                HTML5 Player should replace this.
+            </p>
+        </video>
+        <script type="text/javascript">
+            jwplayer("player9").setup({
+            	players: settings.players(window.location.href, ["flash", "download"])
+            });
+        </script>
+        <h2>Video tag with multiple sources</h2>
+        <video height="270" id="player10" poster="http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg" width="480">
+            <source src="http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4" type="video/mp4" /><source src="http://content.bitsontherun.com/videos/gSzpo2wh-604476.ogv" type="video/ogg" />
+            <p>
+                HTML5 Player should replace this.
+            </p>
+        </video>
+        <script type="text/javascript">
+            jwplayer("player10").setup({
+            	players: settings.players(window.location.href, ["flash", "download"])
+            });
+        </script>
+        <h2>Playlist with one source per item (mp4)</h2>
+        <div id="player11">
+        </div>
+        <script type="text/javascript">
+            var playlist1 = [{
+            	file: playlist[0].levels[0].file,
+            	image: playlist[0].image
+            }, {
+            	file: playlist[1].levels[0].file,
+            	image: playlist[1].image
+            }, {
+            	file: playlist[2].levels[0].file,
+            	image: playlist[2].image
+            }];
+            jwplayer("player11").setup({
+            	playlist: playlist1,
+            	players: settings.players(window.location.href, ["flash", "download"]) 
+            });
+        </script>
+        <h2>Playlist with one source per item (ogv)</h2>
+        <div id="player12">
+        </div>
+        <script type="text/javascript">
+            var playlist2 = [{
+            	file: playlist[0].levels[1].file,
+            	image: playlist[0].image
+            }, {
+            	file: playlist[1].levels[1].file,
+            	image: playlist[1].image
+            }, {
+            	file: playlist[2].levels[1].file,
+            	image: playlist[2].image
+            }];
+            jwplayer("player12").setup({
+            	playlist: playlist2,
+            	players: settings.players(window.location.href, ["flash", "download"])
+            });
+        </script>
+        <h2>Playlist with multiple sources per item</h2>
+        <div id="player13">
+        </div>
+        <script type="text/javascript">
+            jwplayer("player13").setup({
+            	playlist: playlist,
+            	players: settings.players(window.location.href, ["flash", "download"])
+            });
+        </script>
+        <h3>HTML code</h3>
+    </body>
+</html>

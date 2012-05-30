@@ -1,0 +1,356 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>Instream API Example</title>
+<script type="text/javascript" src="../../bin-debug/jwplayer.js">
+        </script>
+<script type="text/javascript" src="settings.js">
+        </script>
+<style type="text/css">
+form {
+	margin-bottom: 15px;
+	overflow: hidden;
+}
+
+formset {
+	display: block;
+	float: left;
+	margin-right: 15px
+}
+</style>
+</head>
+<body>
+<script type="text/javascript">
+            document.write("<h1>" + document.title + "</h1>");
+        </script>
+
+<form action="" method="get"><formset>
+<h3>Player Options</h3>
+<label>Rendering mode</label> <select id="mode" name="mode">
+	<option id="mode_flash" value="flash" selected="selected">Flash
+	-> HTML5</option>
+	<option id="mode_html5" value="html5">HTML5 -> Flash</option>
+</select><br />
+<label>Instream Timing</label> <select id="timing" name="timing">
+	<option id="timing_beforeplay" value="beforeplay" selected="selected">onBeforePlay</option>
+	<option id="timing_button" value="button">Button click</option>
+	<option id="timing_time" value="time">At 5 seconds</option>
+	<option id="timing_complete" value="complete">onComplete</option>
+	<option id="timing_plugin" value="plugin">InStream Ad Plugin
+	(Flash only)</option>
+</select><br />
+<label>Controlbar Position</label> <select id="controlbar" name="controlbar">
+	<option id="controlbar_over" value="over" selected="selected">Over</option>
+	<option id="controlbar_bottom" value="bottom">Bottom</option>
+	<option id="controlbar_top" value="top">Top</option>
+</select><br />
+<label>Playlist Position</label> <select id="playlist" name="playlist">
+	<option id="playlist_none" value="none" selected="selected">None</option>
+	<option id="playlist_right" value="right">Right</option>
+</select><br />
+<label>Repeat</label> <select id="repeat" name="repeat">
+	<option id="repeat_none" value="none" selected="selected">None</option>
+	<option id="repeat_list" value="list">List</option>
+	<option id="repeat_always" value="always">Always</option>
+	<option id="repeat_single" value="single">Single</option>
+</select><br />
+<label>Skin</label> <select id="skin" name="skin">
+	<option id="skin_" value="" selected="selected">None</option>
+	<option id="skin_beelden" value="beelden">Beelden</option>
+	<option id="skin_classic" value="classic">Classic</option>
+</select><br />
+<label>Stretching</label> <select id="stretching" name="stretching">
+	<option id="stretching_uniform" value="uniform" selected="selected">Uniform</option>
+	<option id="stretching_exactfit" value="exactfit">Exactfit</option>
+	<option id="stretching_fill" value="fill">Fill</option>
+	<option id="stretching_none" value="none">None</option>
+</select> </formset> <formset>
+<h3>InStream Options</h3>
+<label>Controlbar Seekable</label> <select id="seekable" name="seekable">
+	<option id="seekable_always" value="always" selected="selected">Always</option>
+	<option id="seekable_never" value="never">Never</option>
+	<option id="seekable_backwards" value="backwards">Backwards</option>
+</select><br />
+<label>Controlbar Pausable</label> <select id="controlbarpausable" name="controlbarpausable">
+	<option id="controlbarpausable_true" value="true" selected="selected">True</option>
+	<option id="controlbarpausable_false" value="false">False</option>
+</select><br />
+<label>Controlbar Stoppable</label> <select id="controlbarstoppable" name="controlbarstoppable">
+	<option id="controlbarstoppable_true" value="true" selected="selected">True</option>
+	<option id="controlbarstoppable_false" value="false">False</option>
+</select><br />
+<label>Playlist Clickable</label> <select id="playlistclickable" name="playlistclickable">
+	<option id="playlistclickable_true" value="true" selected="selected">True</option>
+	<option id="playlistclickable_false" value="false">False</option>
+</select><br />
+<label>Autoload</label> <select id="autoload" name="autoload">
+	<option id="autoload_false" value="false" selected="selected">False</option>
+	<option id="autoload_true" value="true">True</option>
+</select><br />
+</formset> <formset>
+<h3>Log Events</h3>
+<label>Action</label> <select id="log" name="log">
+	<option id="log_console" value="console" selected="selected">console.log</option>
+	<option id="log_alert" value="alert">alert</option>
+</select><br />
+<label>Event</label> <select id="events" multiple="multiple" size="10" name="events" multiple="multiple" size="10">
+	<option id="events_onPlay" value="onPlay">onPlay</option>
+	<option id="events_onPause" value="onPause">onPause</option>
+	<option id="events_onBuffer" value="onBuffer">onBuffer</option>
+	<option id="events_onIdle" value="onIdle">onIdle</option>
+	<option id="events_onComplete" value="onComplete">onComplete</option>
+	<option id="events_onTime" value="onTime">onTime</option>
+	<option id="events_onSeek" value="onSeek">onSeek</option>
+	<option id="events_onMeta" value="onMeta">onMeta</option>
+	<option id="events_onMute" value="onMute">onMute</option>
+	<option id="events_onVolume" value="onVolume">onVolume</option>
+	<option id="events_onFullscreen" value="onFullscreen">onFullscreen</option>
+	<option id="events_onError" value="onError">onError</option>
+	<option id="events_onInstreamClick" value="onInstreamClick">onInstreamClick</option>
+	<option id="events_onInstreamDestroyed" value="onInstreamDestroyed">onInstreamDestroyed</option>
+</select> </formset>
+
+<input type="submit" id="go" style="float: left; clear: left" value="Update" />
+</form>
+</p>
+
+
+<hr />
+
+<div style="width: 100%; height: 300px; overflow: auto">
+<div style="float: left;">
+<div height="270" id="player" width="480">Player should replace
+this</div>
+</div>
+<div style="float: left; margin-left: 15px;">
+<button id="instreamInit" onclick="initInstream();return false;"
+	style="display: none">Click to initialize Instream</button>
+<div id="instreamActions"><label>Instream Controls</label>
+<button id="play" onclick="playInstream();return false;">Play</button>
+<button id="pause" onclick="pauseInstream();return false;">Pause</button>
+<button id="seek" onclick="seekInstream(10);return false;">seek(10)</button>
+<button id="getters" onclick="updateGetters();return false;">Update
+Getters</button>
+<button id="destroy" onclick="destroyInstream();return false">Destroy</button>
+<br />
+<label>State:</label><span id="state">IDLE</span><br />
+<label>Position:</label><span id="position">0.0</span><br />
+<label>Duration:</label><span id="duration">0.0</span></div>
+</div>
+</div>
+<script type="text/javascript">
+	    	var player = null;
+	    	var instream = null;
+	    	var instreamOptions = {};
+        	
+        	function setupAll() {
+                var mode = document.getElementById('mode').value;
+                var timing = document.getElementById('timing').value;
+                var skin = document.getElementById('skin').value;
+                var stretching = document.getElementById('stretching').value;
+                var controlbar = document.getElementById('controlbar').value;
+                var playlist = document.getElementById('playlist').value;
+                var repeat = document.getElementById('repeat').value;
+
+                instreamOptions = {
+					controlbarseekable: document.getElementById('seekable').value,
+					controlbarpausable: document.getElementById('controlbarpausable').value,
+					controlbarstoppable: document.getElementById('controlbarstoppable').value,
+					playlistclickable: document.getElementById('playlistclickable').value,
+					autoload: document.getElementById('autoload').value
+				};
+    			
+                var events = {};
+                var plugins = {};
+                var timingHit = false;
+                var played = false;
+
+                document.getElementById("instreamInit").style.display = (timing == "button" ? "block" : "none");
+                    
+                switch (timing) {
+                case "beforeplay":
+                    events = {
+                        onPlaylistItem: function(evt) {
+                        	played = false;
+                    	},
+                        onBeforePlay: function(evt) {
+                            if (!played) {
+                                played = true;
+	                    		initInstream();
+                            }
+                    	} 
+                    }
+                    break;
+                case "time":
+                    events = {
+                       onTime: function(evt) {
+							if (!timingHit && evt.position >= 5) {
+								timingHit = true;
+								initInstream();
+							}
+                       }
+                    }
+                    break;
+                case "complete":
+                    events = {
+                        onComplete: function(evt) {
+                    		initInstream();
+                    	}
+                    }
+                    break;
+                case "plugin":
+                    if (mode.indexOf("flash") >= 0) {
+	                    plugins = {
+	                        'instream/instreamads.swf': {
+	                        	'adconfig':'instream/adschedule.xml'
+	                    	}
+	                    }
+                    }
+                    break;
+                }
+
+				var setupBlock = {
+   		         	players: settings.modes[mode],
+   		         	playlist: [
+   	   		   		        {   image: "http://content.bitsontherun.com/thumbs/nPripu9l-480.jpg",
+   	   		   		   			title: "Big Buck Bunny trailer",
+   	   	   		   		        levels: [{file: "http://content.bitsontherun.com/videos/nPripu9l-DaVyfMJc.mp4"},{file:"http://content.bitsontherun.com/videos/nPripu9l-1Lq5Mnwq.webm"}] 
+   	     	   	   		    },
+   	   		   		        {   title: "Elephants dream trailer",
+   	   	   		   		        image: "http://content.bitsontherun.com/thumbs/6O7cYVpH-480.jpg",
+   	   	   		   		        levels: [{file: "http://content.bitsontherun.com/videos/6O7cYVpH-1ahmry41.mp4"},{file:"http://content.bitsontherun.com/videos/6O7cYVpH-1Lq5Mnwq.webm"}] }
+   		   		    ],
+    	        	events: events,
+    	        	controlbar: controlbar,
+    	        	'playlist.position': playlist,
+    	        	'playlist.size': 200,
+    	        	stretching: stretching,
+    	        	width: playlist == "none" ? 480 : 680,
+					repeat: repeat,
+					plugins: plugins
+	            };
+	            if (skin) {
+	                setupBlock.skin = "../../../../../tags/skins/" + skin + "/" + skin + ".zip";
+	            }
+
+                if (player) {
+					player.remove();
+                }
+                player = jwplayer("player").setup(setupBlock);
+	     	    return false;   	
+	        }
+
+			function initInstream() {
+				instream = player.loadInstream({
+					levels:[
+							{file:"http://content.bitsontherun.com/videos/yYul4DRz-1ahmry41.mp4"},
+							{file:"http://content.bitsontherun.com/videos/yYul4DRz-1Lq5Mnwq.webm"}
+					],
+					duration: 5
+				}, instreamOptions);
+
+				instream.onInstreamDestroyed(function(evt) {
+	                document.getElementById("instreamInit").style.display = "block";
+				});
+				
+				if (instream) {
+	                document.getElementById("instreamInit").style.display = "none";
+					setupEvents();
+				} else {
+					alert("Instream Player not present");
+				}
+			} 
+
+			function playInstream() {
+				if(instream) {
+					console.log("Calling instream.play(true);");
+					instream.play(true);
+				}
+			}
+			
+			function pauseInstream() {
+				if(instream) {
+					console.log("Calling instream.pause(true);");
+					instream.pause(true);
+				}
+			}
+			
+			function seekInstream(pos) {
+				if(instream) {
+					console.log("Calling instream.seek("+pos+");");
+					instream.seek(pos);
+				}
+			}
+			
+			function updateGetters() {
+				if (instream) {
+					document.getElementById("state").innerHTML = instream.getState();
+					document.getElementById("position").innerHTML = instream.getPosition();
+					document.getElementById("duration").innerHTML = instream.getDuration();
+				}
+			}
+			
+			function destroyInstream() {
+				if(instream) {
+					console.log("Calling instream.destroy();");
+					instream.destroy();
+				}
+			}
+
+
+			function setDefaultEvents() {
+				var events = getVariable("events");
+				if (!events) return;
+				var selectedEvents = events.split(',');
+				for (var i=0; i<selectedEvents.length; i++) {
+					var opt = document.getElementById("events_"+selectedEvents[i]);
+					if (opt) {
+						opt.selected = true;
+					}
+				}
+			}
+			
+			function setupEvents() {
+				if (!instream) return;
+
+				var allOptions = document.getElementById("events").options;
+				
+				for (var i=0; i < allOptions.length; i++) {
+					var option = allOptions[i];
+					if (option.selected) {
+						var eventHandler = instream[option.value];
+						if (typeof eventHandler == "function") {
+							eventHandler(function(evt) {
+								if (document.getElementById("log").value == "console") {
+									console.log("Event generated: " + evt.type);
+									console.log(evt);
+								} else {
+									alert("Event generated: " + evt.type);
+								}
+							});
+						}
+					}
+				}
+			}
+
+			setDefault("timing");
+			setDefault("mode");
+			setDefault("skin");
+			setDefault("stretching");
+			setDefault("controlbar");
+			setDefault("playlist");
+			setDefault("repeat");
+
+			setDefault("seekable");
+			setDefault("controlbarpausable");
+			setDefault("controlbarstoppable");
+			setDefault("playlistclickable");
+			setDefault("autoload");
+			setDefaultEvents();
+			
+			setupAll();
+        </script>
+
+<h3>HTML code</h3>
+</body>
+</html>

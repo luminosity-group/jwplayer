@@ -1,0 +1,235 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>HTML5 Player Examples</title>
+<style type="text/css">
+body {
+	font-family: Arial, Verdana, sans-serif;
+	font-size: .8em;
+	padding-left: 1em;
+}
+
+ul {
+	margin-left: 0;
+	padding: 1em;
+}
+</style>
+</head>
+<body>
+<h1>Examples</h1>
+<ul id="examples">
+</ul>
+<script type="text/javascript">
+            var list = document.getElementById("examples");
+            var examplePages = {
+            	"Basic Tests": {
+            		"Page with no document type": "nodoctype.html",
+            		"Embedding": {
+            			"Object and embed tags": "objectembed.html",
+            			"Video tag embed": "videotag.html",
+            			"Multiple players": "multiple_players.html",
+            			"File paths": {
+            				"No file specified": "nofile.html",
+            				"Invalid file path specified": "badfile.html",
+							"Unkown / no file extension": "noextension.html",
+            				"Absolute file path": "filepathsabsolute.html",
+            				"Root file path": "filepathsroot.html",
+            				"Relative file path": "filepathsrelative.html"
+            			},
+						"Mode specific targetting": "modespecificconfig.html",
+						"Mode alias": "modealias.html",
+	            		"Multiple jwplayer.js": "multiplejwplayerjs.html"
+            		},
+            		"Video codecs": {
+            			"Single MP4": "single_mp4.html",
+            			"Single WebM": "single_webm.html",
+            			"Single OGV": "single_ogv.html",
+            			"Single FLV": "single_flv.html",
+            			"YouTube": "youtube.html",
+            			"Multiple sources (MP4 and OGV)": "mp4_ogv.html",
+            			"Bitrate switching": "bitrateswitching.html",
+            			"RTMP": "rtmp.html"
+            		},
+            		"Audio codecs": {
+            			"Single MP3": "single_mp3.html",
+            			"Single OGG (Vorbis)": "single_ogg.html"
+            		}
+            	},
+            	"Configuration Tests": {
+					"Width / Height": "heightwidth.html",
+					"Autostart": "autostart.html",
+					"Providers": "providers.html", 
+            		"Multiple players with various options": "multiple_customs.html",
+					"Components + positions": "components.html",
+            		"Skins": {
+            			"All Skins": "custom_skin.html",
+            			"Invalid skin path specified": "badskin.html",
+            			"Skin redirect": "testskin.html"
+            		},
+            		"Playlists": {
+            			"Progressive download": "playlist.html?type=progressive",
+            			"Progressive video + audio": "playlist.html?type=audio",
+            			"RTMP": "playlist.html?type=rtmp",
+            			"Mixed": "playlist.html?type=mixed",
+            			"XML Playlist": "xmlplaylists.html"
+            		},
+            		"Components": {
+            			"Controlbar": "controlbar.html",
+            			"Logo": "logo.html",
+            			"Dock": "dock.html",
+            			"Playlist": {
+            		    "Playlist Component": "playlistcomponent.html",
+            		    "Playlist with iScroll (iOS Only)": "playlistiscroll.html"
+            		  }
+            		},
+            		"Plugins": {
+						"Plugin strings": "pluginstrings.html",
+						"Loading and Configuration" : {
+							"Local": {
+								"Absolute referenced": {
+									"JavaScript": "plugins.html?"+escape('var config = {title:"Absolute Path - JavaScript", plugins:{"http://playertest.longtailvideo.com/plugins/textplugin.js":{text:"Plugin successfully loaded!"}}}'),
+									"Flash":"plugins.html?"+escape('var config = {title:"Absolute Path - Flash", plugins:{"http://playertest.longtailvideo.com/plugins/hd.swf":{"file":"http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4"}}}')
+								},
+								"Root referenced": {
+									"JavaScript": "plugins.html?"+escape('var config = {title:"Root Path - JavaScript", plugins:{"/player/trunk/fl5/js/test/examples/plugins/textplugin.js":{text:"Plugin successfully loaded!"}}}'),
+									"Flash":"plugins.html?"+escape('var config = {title:"Root Path - Flash", plugins:{"/player/trunk/fl5/js/test/examples/plugins/hd.swf":{"file":"http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4"}}}')
+								},
+								"Relatively referenced": {
+									"JavaScript": "plugins.html?"+escape('var config = {title:"Relative Path - JavaScript", plugins:{"plugins/textplugin.js":{text:"Plugin successfully loaded!"}}}'),
+									"Flash":"plugins.html?"+escape('var config = {title:"Relative Path - Flash", plugins:{"plugins/hd.swf":{"file":"http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4"}}}')
+								},
+								"Bad Path": {
+									"JavaScript": "plugins.html?"+escape('var config = {title:"Bad Path - JavaScript", plugins:{"plugins/textplugin1.js":{text:"Plugin successfully loaded!"}}}'),
+									"Flash":"plugins.html?"+escape('var config = {title:"Bad Path - Flash", plugins:{"http://developer.longtailvideo.com/player/trunk/fl5/js/test/examples/plugins/hd1.swf":{"file":"http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4"}}}')
+								},
+								"Mixed Mode": {
+									"CDN": "plugins.html?"+escape('var config = {title:"Mixed Mode - CDN", plugins:{"plugins/hd-cdn.js":{text:"Plugin successfully loaded!", "file":"http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4"}}}'),
+									"Absolute": "plugins.html?"+escape('var config = {title:"Mixed Mode - Absolute", plugins:{"plugins/hd-absolute.js":{text:"Plugin successfully loaded!", "file":"http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4"}}}'),
+									"Root": "plugins.html?"+escape('var config = {title:"Mixed Mode - Root", plugins:{"plugins/hd-root.js":{text:"Plugin successfully loaded!", "file":"http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4"}}}'),
+									"Relative": "plugins.html?"+escape('var config = {title:"Mixed Mode - Relative", plugins:{"plugins/hd-relative.js":{text:"Plugin successfully loaded!", "file":"http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4"}}}'),
+									"Bad": "plugins.html?"+escape('var config = {title:"Mixed Mode - Bad", plugins:{"plugins/hd-bad.js":{text:"Plugin successfully loaded!", "file":"http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4"}}}')
+								},
+								"Dock buttons" : {
+									"Flash": "docksetbutton.html?flash",
+									"Html5": "docksetbutton.html?html5"
+								}
+								//"Flash Only": "plugins/local/flash.html",
+								//"Multiple plugins": "plugins/local/multiple.html",
+								//"Versioning": "plugins/local/versioning.html"
+							},
+							"Hosted": {
+								"JavaScript": "plugins.html?"+escape('var config = {title:"Absolute Path - JavaScript", plugins:{"textplugin":{text:"Plugin successfully loaded!"}}}'),
+								"Flash":"plugins.html?"+escape('var config = {title:"Absolute Path - Flash", plugins:{"hd":{"file":"http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4"}}}')
+							}
+						}
+					},
+            		"Stretching": "stretching.html",
+            		"Chromeless": "chromeless.html"
+            	},
+            	"API": {
+            		"Utilities": {
+            			"API": "api.html",
+            			"Event listeners": "listeners.html"
+            		},
+            		"Setup / remove": "setupandremove.html",
+            		"Unit Tests": {
+            			"Events (in setup block)": "apiunittesteventssetup.html",
+            			"Events (dynamic)": "apiunittesteventsdynamic.html",
+            			"Play": "apiunittestplay.html",
+            			"Pause": "apiunittestpause.html",
+            			"Mute": "apiunittestmute.html",
+            			"Fullscreen": "apiunittestfullscreen.html"
+            		},
+            		"Resize": "resize.html",
+            		"Load": "load.html"
+            	},
+            	"Common Libraries": {
+            		"Dojo": "libraries/dojo.html",
+            		"Ext Core": "libraries/ext-core.html",
+            		"jQuery": "libraries/jquery.html",
+            		"MooTools": "libraries/mootools.html",
+            		"Prototype": "libraries/prototype.html",
+            		"Scriptaculous": "libraries/scriptaculous.html",
+            		"SWFObject": "libraries/swfobject.html",
+            		"YUI": "libraries/yui.html"
+            	},
+            	"Player 5.4": {
+            		"Bugs": {
+            			"Social media": "socialmedia.html",
+            			"Loading HTML instead of a skin": "htmlskin.html",
+            			"Firefox bug": "ff3bug.html#",
+            			"FLV failover": "failover.html",
+            			"Video URLs with query strings": "extensions.html",
+            			"Skins: Controlbar without settings block": "testskin.html"
+            		},
+            		"Features": {
+            			"Apple (Cupertino) Streaming": "m3u8.html",
+            			"Netstream base path": "netstreambasepath.html",
+            			"Settable wmode": "wmode.html",
+            			"Download fallback": "downloadfallback.html"
+            		}
+            	},
+            	"Player 5.5": {
+            		"Bugs": {
+            			"Embed location": "embedlocation.html"
+            		}
+            	},
+            	"Player 5.6": {
+            		"Bugs": {
+            			"Switching HTTP mediaprovider": "switchhttp.html",
+            			"Mixed plugin locations": "mixedpluginlocations.html",
+						"HTTP Startparam" : "configdeserializer.html",
+						"Versioned JS Plugins" : "versionedplugins.html"
+            		},
+            		"Features": {
+            		    "Enchanced tabbing capabilities": "tabbing.html",
+          		 	    "Display.showmute": "showmute.html"
+            		}
+            	},
+	        	"Player 5.7": {
+            		"Bugs": {
+            		},
+            		"Features": {
+            			"image.duration": "imageduration.html",
+            			"Show and Hide events": "showhide.html"
+            	  	}
+              	},
+              	"Player 5.8": {
+            		"Bugs": {
+            		  "100% Height / Width (parent is &lt;body&gt;)": "hundredpercent.html"
+            		},
+              	},
+	        	"Player 5.9": {
+                	"Features": {
+	            		"onBeforePlay Event": "onbeforeplay.html",
+                		"InStream API": "instream.html"
+                	},
+                	"Enhancements": {
+                    	"Correct 'almost uniform' dimensions": "almostuniform.html"
+                	}
+                }
+            };
+            
+            function createList(examples, parentDOM) {
+            	for (var example in examples) {
+            		var listItem = document.createElement("li");
+            		if (typeof examples[example] == "object") {
+            			listItem.innerHTML = example;
+            			var newList = document.createElement("ul");
+            			listItem.appendChild(newList);
+            			createList(examples[example], newList);
+            		} else {
+            			var link = document.createElement("a");
+            			link.href = examples[example];
+            			link.innerHTML = example;
+            			listItem.appendChild(link);
+            		}
+            		parentDOM.appendChild(listItem);
+            	}
+            }
+            
+            
+            createList(examplePages, list);
+        </script>
+</body>
+</html>

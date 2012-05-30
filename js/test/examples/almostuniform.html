@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <title>"Almost Uniform" Example</title>
+        <script type="text/javascript" src="../../bin-debug/jwplayer.js">
+        </script>
+        <script type="text/javascript" src="settings.js">
+        </script>
+    </head>
+    <body>
+        <script type="text/javascript">
+            document.write("<h1>" + document.title + "</h1>");
+        </script>
+        <p>
+            This tests an enhancement which locks the media's dimensions to its container's dimensions if it's close (&lt; 5%)
+        </p>
+        <p>Rendering mode:
+            <select id="mode">
+              <option id="mode_html5" value="html5" selected="selected">HTML5</option>
+              <option id="mode_flash" value="flash">Flash</option>
+            </select>
+			<button id="update" onclick="return setupAll();">Update</button>
+        </p>
+        
+		  <h3>Correct Dimensions</h3>
+        <div id="player_correct">
+        	Player should replace this
+        </div>
+		  <h3>Vertical dimension too big (should correct)</h3>
+        <div id="player_off_vert">
+        	Player should replace this
+        </div>
+		  <h3>Horizontal dimension too big (should correct)</h3>
+        <div id="player_off_horizontal">
+        	Player should replace this
+        </div>
+		  <h3>Vertical dimension way too big (shouldn't correct)</h3>
+        <div id="player_way_off_vert">
+        	Player should replace this
+        </div>
+		  <h3>Horizontal dimension way too big (shouldn't correct)</h3>
+        <div id="player_way_off_horizontal">
+        	Player should replace this
+        </div>
+        <script type="text/javascript">
+			setDefault("mode");
+       
+        	function setupAll() {
+                var mode = document.getElementById('mode').value;
+
+                jwplayer("player_correct").setup({
+   		         	players: settings.modes[mode],
+							width: 480,
+							height: 270,
+							stretching: "uniform",
+   		         	file: "http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4",
+    	        			image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg"
+                });
+                jwplayer("player_off_vert").setup({
+   		         	players: settings.modes[mode],
+							width: 480,
+							height: 280,
+							stretching: "uniform",
+   		         	file: "http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4",
+    	        			image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg"
+                });
+                jwplayer("player_off_horizontal").setup({
+   		         	players: settings.modes[mode],
+							width: 500,
+							height: 270,
+							stretching: "uniform",
+   		         	file: "http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4",
+    	        			image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg"
+                });
+                jwplayer("player_way_off_vert").setup({
+   		         	players: settings.modes[mode],
+							width: 480,
+							height: 320,
+							stretching: "uniform",
+   		         	file: "http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4",
+    	        			image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg"
+                });
+                jwplayer("player_way_off_horizontal").setup({
+   		         	players: settings.modes[mode],
+							width: 530,
+							height: 270,
+							stretching: "uniform",
+   		         	file: "http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4",
+    	        			image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg"
+                });
+        	}
+	          setupAll();
+        </script>
+        <h3>HTML code</h3>
+    </body>
+</html>

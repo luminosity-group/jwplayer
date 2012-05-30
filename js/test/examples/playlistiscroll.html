@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <title>Playlist with iScroll</title>
+        <script type="text/javascript" src="../../bin-debug/jwplayer.js"></script>
+        <script type="text/javascript" src="settings.js"></script>
+        <script type="text/javascript" src="assets/iscroll-lite-min.js"></script>
+    </head>
+    <body>
+        <script type="text/javascript">
+            document.write("<h1>" + document.title + "</h1>");
+            
+            var playlistObj = [{
+           			file: "http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4",
+            		image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg",
+            		title: "Item 1",
+            		description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+            	}, {
+           			file: "http://content.bitsontherun.com/videos/guYqV1AB-486405.mp4",
+            		title: "Item 2",
+               		description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+	           	}, {
+           			file: "http://content.bitsontherun.com/videos/DMJODX8R-486405.mp4",
+            		image: "http://content.bitsontherun.com/thumbs/DMJODX8R-480.jpg",
+            		title: "Item 3",
+            		description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+            	}, {
+           			file: "http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4",
+            		image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg",
+            		title: "Item 4"
+            	}, {
+           			file: "http://content.bitsontherun.com/videos/guYqV1AB-486405.mp4",
+            		image: "http://content.bitsontherun.com/thumbs/guYqV1AB-480.jpg",
+            		title: "Item 5"
+            	}, {
+           			file: "http://content.bitsontherun.com/videos/DMJODX8R-486405.mp4",
+            		image: "http://content.bitsontherun.com/thumbs/DMJODX8R-480.jpg",
+            		title: "Item 6"
+            	}];
+        </script>
+        <p>
+            This demonstrates the HTML5 player in conjunction with the iScroll library for iOS list scrolling.
+        </p>
+        
+        <div height="270" id="player1" width="680">
+            JW Player should replace this
+        </div>
+        
+
+        <script type="text/javascript">
+           	jwplayer("player1").setup({
+            	modes: settings.modes.html5only,
+           		playlist: playlistObj,
+           		"playlist.position": "right",
+           		"playlist.size": "295"
+            });
+
+        </script>
+    </body>
+</html>

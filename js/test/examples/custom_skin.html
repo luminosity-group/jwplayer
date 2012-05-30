@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <title>Custom skin</title>
+        <script type="text/javascript" src="../../bin-debug/jwplayer.js">
+        </script>
+        <script type="text/javascript" src="settings.js">
+        </script>
+        
+        <style type="text/css">
+          .container {
+            float: left; 
+            border: 1px solid black;
+            margin: 5px;
+            padding: 5px;
+          }
+        
+        </style>
+    </head>
+    <body>
+        <script type="text/javascript">
+            document.write("<h1>" + document.title + "</h1>");
+        </script>
+        <p>
+            This sets up a player for each open source skin. The player will be setup with multiple sources, so it should play in IE9, FF, Chrome, Safari, and Opera. IE < 9 will simply display "HTML5 Player should replace this".
+        </p>
+
+        <div class="container">
+          <h2>HTML5</h2>
+          <div id='html5only'></div>        
+        </div>
+        <div class="container">
+          <h2>Flash</h2>
+          <div id='flashonly'></div>        
+        </div>
+        
+        
+        <script type="text/javascript">
+          var skins = {
+            'beelden':  "../../../../../skins/beelden/beelden.zip",
+            'bekle':    "../../../../../skins/bekle/bekle.zip",
+            'classic':  "../../../../../tags/skins/classic/classic.zip",
+            'five':     "../../../../../skins/five/five.zip",
+            'glow':     "../../../../../skins/glow/glow.zip",
+            'grungetape': "../../../../../tags/skins/grungetape/grungetape.zip",
+            'icecreamsneaka': "../../../../../../tags/skins/icecreamsneaka/icecreamsneaka.zip",
+            'modieus':  "../../../../../skins/modieus/modieus.zip",
+            'lulu':     "../../../../../tags/skins/lulu/lulu.zip",
+            'nacht':    "../../../../../skins/nacht/nacht.zip",
+            'playcasso':  "../../../../../tags/skins/playcasso/playcasso.zip",
+            'schoon':   "../../../../../tags/skins/schoon/schoon.zip",
+            'snel':     "../../../../../tags/skins/snel/snel.zip",
+            'stijl':    "../../../../../skins/stijl/stijl.zip",
+            'stormtrooper'  : "../../../../../skins/stormtrooper/stormtrooper.zip"
+          };
+          
+          var config = {
+            playlist: [{
+              	levels: [{
+              		file: "http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4"
+              	}, {
+              		file: "http://content.bitsontherun.com/videos/gSzpo2wh-604476.ogv"
+              	}],
+              	image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg",
+              	description: "From the Blender Foundation",
+              	title: "Big Buck Bunny"
+            	},{
+              	levels: [{
+              		file: "http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4"
+              	}, {
+              		file: "http://content.bitsontherun.com/videos/gSzpo2wh-604476.ogv"
+              	}],
+              	image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg",
+              	description: "From the Blender Foundation",
+              	title: "Big Buck Bunny"
+            }],
+          	"playlist.position": "right",
+          	"playlist.size": "200",
+          	height: 270,
+          	width: 580
+          };
+          
+          function setupAll(div) {
+            var playersDiv = document.getElementById(div);
+            playersDiv.innerHTML = "";
+            
+            var selected = window.location.href.match(/skin=(\w+)/);
+            var toRender = skins;
+            if (selected && selected.length > 0) {
+              toRender = {};
+              toRender[selected[1]] = skins[selected[1]];
+            }
+            
+            for (var skin in toRender) {
+              var title = document.createElement("h3");
+              title.innerHTML = skin.charAt(0).toUpperCase() + skin.substr(1, skin.length);
+              playersDiv.appendChild(title);
+              
+              var wrapper = document.createElement("div");
+              wrapper.innerHTML = "Player goes here";
+              wrapper.id = div+"_"+skin;
+              playersDiv.appendChild(wrapper);
+              
+              jwplayer(div+"_"+skin).setup(jwplayer.utils.extend(config, {
+              	modes: settings.modes[div],
+              	skin: skins[skin]
+              }));
+              
+            }
+             
+          }
+
+          var mode = window.location.href.match(/mode=(\w+)/);
+          if (mode && mode.length > 0) {
+              if (mode[1] == "flash") {
+	           	  setupAll("flashonly");
+              } else {
+				  setupAll("html5only");
+              }
+          } else {
+          	setupAll("html5only");
+          	setupAll("flashonly");
+          }
+          
+        </script>
+        
+
+    </body>
+</html>

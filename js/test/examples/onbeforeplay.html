@@ -1,0 +1,79 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <title>onBeforePlay Event Example</title>
+        <script type="text/javascript" src="../../bin-debug/jwplayer.js">
+        </script>
+        <script type="text/javascript" src="settings.js">
+        </script>
+    </head>
+    <body>
+        <script type="text/javascript">
+            document.write("<h1>" + document.title + "</h1>");
+        </script>
+        <p>Rendering mode:
+          <form>
+            <label>Rendering mode</label>
+            <select id="renderer">
+              <option value="flashonly" selected="selected">Flash Only</option>
+              <option value="html5only">HTML5 Only</option>
+            </select><br/>
+            <label>onBeforePlay Action</label>
+            <select id="action">
+              <option value="stop" selected="selected">this.stop()</option>
+              <option value="pause">this.pause(true)</option>
+              <option value="mute">this.setMute()</option>
+              <option value="seek">this.seek(5)</option>
+              <option value="load">this.load()</option>
+              <option value="alert">alert()</option>
+            </select><br/>
+            <button id="go" onclick="return setupAll();">Update</button>
+          </form>
+        </p>
+        
+        <div height="270" id="player" width="480">
+        	Player should replace this
+        </div>
+        <script type="text/javascript">
+        	function setupAll() {
+                var mode = document.getElementById('renderer').value;
+
+                jwplayer("player").setup({
+   		         	players: settings.modes[mode],
+   		         	levels: [{file: "http://content.bitsontherun.com/videos/nPripu9l-DaVyfMJc.mp4"},{file:"http://content.bitsontherun.com/videos/nPripu9l-1Lq5Mnwq.webm"}],
+    	        	image: "http://content.bitsontherun.com/thumbs/nPripu9l-480.jpg",
+    	        	events: {
+    	        		onBeforePlay: function(evt) {
+							switch(document.getElementById('action').value) {
+							case "stop":
+								console.log("Stopping");
+								this.stop();
+								console.log("State: " + this.getState());
+								break;
+							case "pause":
+								this.pause(true);
+								break;
+							case "mute":
+								this.setMute();
+								break;
+							case "seek":
+								this.seek(5);
+								break;
+							case "load":
+								this.load({levels:[{file: "http://content.bitsontherun.com/videos/6O7cYVpH-DaVyfMJc.mp4"},{file:"http://content.bitsontherun.com/videos/6O7cYVpH-1Lq5Mnwq.webm"}]});
+								break;
+							case "alert":
+								alert("Current state: " + this.getState());
+								break;
+							}
+                		}
+	        		
+                	}
+                });
+	     	    return false;   	
+	          }
+	          setupAll();
+        </script>
+        <h3>HTML code</h3>
+    </body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <title>Relative file paths</title>
+        <script type="text/javascript" src="../../bin-debug/jwplayer.js">
+        </script>
+        <script type="text/javascript" src="settings.js">
+        </script>
+    </head>
+    <body>
+        <script type="text/javascript">
+            document.write("<h1>" + document.title + "</h1>");
+        </script>
+        <p>
+            This page sets up a players to test referencing files via a relative path. You should open Charles and confirm that you do not see any duplicate requests for resources, and that no resources have //, ./, or ../ in their path.
+        </p>
+        <p>
+            It parses a &lt;video&gt; tag and sets up a player in it's place for IE9, FF, Chrome, Safari, and Opera. IE < 9 will simply display "HTML5 Player should replace this".
+        </p>
+        <h2>Relatively referenced</h2>
+        <p>
+            This references files based on an absoute path, vis-a-vis "/videos/video.mp4"
+        </p>
+        <video height="270" id="player" poster="http://playertest.longtailvideo.com/bunny.png" width="480">
+            <source src="http://playertest.longtailvideo.com/bunny.mp4" type="video/mp4" />
+            <source src="http://playertest.longtailvideo.com/bunny.ogv" type="video/ogg" />
+            <p>
+                HTML5 Player should replace this.
+            </p>
+        </video>
+        <script type="text/javascript">
+            setTimeout(function() {
+            	jwplayer("player").setup({
+            		players: settings.players(window.location.href)
+            	});
+            }, 1000);
+        </script>
+        <h3>HTML code</h3>
+    </body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <title>Bitrate Switching</title>
+        <script type="text/javascript" src="../../bin-debug/jwplayer.js">
+        </script>
+        <script type="text/javascript" src="settings.js">
+        </script>
+    </head>
+    <body>
+        <script type="text/javascript">
+            document.write("<h1>" + document.title + "</h1>");
+        </script>
+        <p>
+            This page contains a player with multiple sources, so it should play back in IE9, FF, Chrome, Safari, and Opera. IE < 9 will simply display "HTML5 Player should replace this".
+        </p>
+        <div height="270" id="player" width="480">
+            HTML5 Player should replace this.
+        </div>
+        <script type="text/javascript">
+            jwplayer("player").setup({
+            	players: settings.players(window.location.href, ["flash", "download"]),
+            	levels: [{
+            		bitrate: "2020",
+            		file: "cg4V7TQw-5RGjFAQM-364803.mp4",
+            		width: "1080"
+            	}, {
+            		bitrate: "1310",
+            		file: "cg4V7TQw-5RGjFAQM-364802.mp4",
+            		width: "720"
+            	}, {
+            		bitrate: "810",
+            		file: "cg4V7TQw-5RGjFAQM-364801.mp4",
+            		width: "480"
+            	}, {
+            		bitrate: "520",
+            		file: "cg4V7TQw-5RGjFAQM-364800.mp4",
+            		width: "320"
+            	}],
+            	image: "http://thumbs.bitsontherun.com/5RGjFAQM.jpg",
+            	type: "RTMP",
+				streamer: "rtmp://sarzsmiotvm99.cloudfront.net/cfx/st",
+				debug: "console"
+            });
+        </script>
+        <h3>HTML code</h3>
+    </body>
+</html>

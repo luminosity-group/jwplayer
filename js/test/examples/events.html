@@ -1,0 +1,42 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <title>Events Unit Tester</title>
+        <script type="text/javascript" src="../../bin-debug/jwplayer.js">
+        </script>
+        <script type="text/javascript" src="settings.js">
+        </script>
+    </head>
+    <body>
+        <script type="text/javascript">
+            document.write("<h1>" + document.title + "</h1>");
+        </script>
+        <p>
+            This tests adding listeners to the player and responding to events. Video should play on FF, Chrome, Safari, and Opera but will fail in IE.
+        </p>
+        <div height="270" id="player" width="480">
+        </div>
+        <h2>Result</h2>
+        <p id="result">
+            Running...
+        </p>
+        <script type="text/javascript">
+            jwplayer("player").setup({
+            	players: settings.players(window.location.href, ["flash", "html5", "download"]),
+            	levels: [{
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4"
+            	}, {
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-604476.ogv"
+            	}],
+            	image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg",
+            	mute: false,
+				events:{
+					onReady: function (){
+						alert("ready");
+					}
+				}
+            });
+        </script>
+        <h3>HTML code</h3>
+    </body>
+</html>

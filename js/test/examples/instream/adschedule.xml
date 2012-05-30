@@ -1,0 +1,14 @@
+<?xml?>
+<adschedule simulate="false">
+	<preroll>
+	 <ad>instream/ad1.xml</ad>
+	 <ad>instream/ad2.xml</ad>
+	</preroll>
+	<midroll>
+	 <ad delay="5">instream/ad1.xml</ad>
+	 <ad delay="10">instream/ad2.xml</ad>
+	</midroll>
+	<postroll>
+	 <ad>instream/ad1.xml</ad>
+	</postroll>
+</adschedule>

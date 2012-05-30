@@ -1,0 +1,163 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <title>Component Show / Hide events</title>
+        <script type="text/javascript" src="../../bin-debug/jwplayer.js">
+        </script>
+        <script type="text/javascript" src="settings.js"></script>
+        <style type="text/css">
+          form{
+            width:400px;
+          }
+          label {
+            display:block;
+            font-weight:bold;
+            text-align:right;
+            width:180px;
+            float:left;
+          }
+          select {
+            float:left;
+            font-size:12px;
+            padding:4px 2px;
+            width:200px;
+            margin:2px 0 3px 3px;
+          }
+        </style>
+    </head>
+    <body>
+        <script type="text/javascript">
+            document.write("<h1>" + document.title + "</h1>");
+        </script>
+            
+        <p>
+            This page demonstrates the show / hide events for the following components:
+            <ul><li>controlbar</li><li>dock</li><li>display</li></ul>
+        </p>
+        
+        <form onsubmit="return false">
+          <label>Select a rendering mode:</label>
+          <select id="mode">
+            <option id="mode_flash" value="flash">Flash</option>
+            <option id="mode_html5" value="html5" selected="selected">HTML5</option>
+          </select>
+          <label>controlbar.idlehide:</label>
+          <select id="idlehide">
+            <option id="idlehide_true" value="true">True</option>
+            <option id="idlehide_false" value="false" selected="selected">False</option>
+          </select>
+          <label>display.icons:</label>
+          <select id="icons">
+            <option id="icons_true" value="true" selected="selected">True</option>
+            <option id="icons_false" value="false" >False</option>
+          </select><br/>
+          <label>skin:</label>
+          <select id="skin">
+            <option id="skin_" value="" selected="selected">None</option>
+            <option id="skin_testskin" value="testskin/testskin.zip" >Test Skin</option>
+          </select><br/>
+          <label>plugins:</label>
+          <select id="plugins">
+            <option id="plugins_" value="" selected="selected">None</option>
+            <option id="plugins_dockplugin" value="plugins/dockplugin.js" >Test Dock Plugin</option>
+          </select>
+          <button id="go" onclick="setupAll()">Go</button>
+        </form>
+        
+        <div>
+          <h3>Default</h3>
+          <div style="float:left; margin-right: 10px">
+            <div id="player1"></div>
+          </div>
+          <div>
+            <span id="player1_output" style="overflow: auto; width: 400px; display:block; height: 290px; border:1px solid black; padding:5px;"></span>
+          </div>
+          <div id="player1_toggles"></div>
+        </div>        
+
+        <script type="text/javascript">
+          var showing = {
+            controlbar: true,
+            display: true,
+            dock: true
+          }
+        
+          function setupAll() {
+            var mode = document.getElementById('mode').value;
+            if (!mode) mode = "standard";
+
+            var idlehide = document.getElementById('idlehide').value;
+            var icons = document.getElementById('icons').value;
+            var skin = document.getElementById('skin').value;
+            var plugins = document.getElementById('plugins').value;
+
+            var idx = 1;
+
+            setupPlayer("player"+idx++, {
+            	modes: settings.modes[mode],
+         			file: "http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4",
+          		image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-580.jpg",
+          		"controlbar.idlehide": idlehide,
+          		"display.icons": icons,
+          		skin: skin,
+          		plugins: plugins
+            });
+          }
+          
+          function setupPlayer(id, config) {
+           	jwplayer(id).setup(config);
+            
+            var output = document.getElementById(id + "_output");
+            output.innerHTML = "";
+            
+            var toggles = document.getElementById(id + "_toggles");
+            toggles.innerHTML = "<a href='#' onclick='toggle(\""+id+"\",\"controlbar\"); return false;'>Toggle Controlbar</a> ";
+            toggles.innerHTML += "<a href='#' onclick='toggle(\""+id+"\",\"display\"); return false;'>Toggle Display Icons</a> ";
+            toggles.innerHTML += "<a href='#' onclick='toggle(\""+id+"\",\"dock\"); return false;'>Toggle Dock</a> ";
+
+            jwplayer(id).getPlugin("controlbar").onShow(function(evt) {
+              output.innerHTML += "Controlbar showing at " + dims(evt.boundingRect) + "<br/>";
+            });
+
+            jwplayer(id).getPlugin("controlbar").onHide(function(evt) {
+              output.innerHTML += "Controlbar hidden at " + dims(evt.boundingRect) + "<br/>";
+            });
+
+            jwplayer(id).getPlugin("dock").onShow(function(evt) {
+              output.innerHTML += "Dock showing at " + dims(evt.boundingRect) + "<br/>";
+            });
+
+            jwplayer(id).getPlugin("dock").onHide(function(evt) {
+              output.innerHTML += "Dock hidden at " + dims(evt.boundingRect) + "<br/>";
+            });
+            
+            jwplayer(id).getPlugin("display").onShow(function(evt) {
+              output.innerHTML += "Display icon showing at " + dims(evt.boundingRect) + "<br/>";
+            });
+
+            jwplayer(id).getPlugin("display").onHide(function(evt) {
+              output.innerHTML += "Display icon hidden at " + dims(evt.boundingRect) + "<br/>";
+            });
+            
+          }
+          
+          function toggle(id, component) {
+            var comp = jwplayer(id).getPlugin(component);
+            showing[component] ? comp.hide() : comp.show();
+            showing[component] = !showing[component];
+          }
+          
+          function dims(rect) {
+            return "(" + rect.x + "," + rect.y + "), " + rect.width + "x" + rect.height;
+          }
+
+          setDefault("mode");
+          setDefault("idlehide");
+          setDefault("icons");
+          setDefault("skin");
+          setDefault("plugins");
+          
+          setupAll();
+        </script>
+    </body>
+</html>

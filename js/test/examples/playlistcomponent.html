@@ -1,0 +1,230 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+<head>
+  <meta name="generator" content=
+  "HTML Tidy for Mac OS X (vers 31 October 2006 - Apple Inc. build 15.3.6), see www.w3.org">
+
+  <title>Playlist UI Component</title>
+  <script type="text/javascript" src="../../bin-debug/jwplayer.js">
+</script>
+  <script type="text/javascript" src="settings.js">
+</script>
+</head>
+
+<body>
+  <script type="text/javascript">
+	  document.write("<h1>" + document.title + "<\/h1>");
+	
+	  var playlistObj = [{
+	  	levels: [{
+	  		file: "http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4"
+	  	}, {
+	  		file: "http://content.bitsontherun.com/videos/gSzpo2wh-604476.ogv"
+	  	}],
+	  	image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-580.jpg",
+	  	title: "Item 1",
+	  	description: "Lorem ipsum dolor est, blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah "
+	  }, {
+	  	levels: [{
+	  		file: "http://content.bitsontherun.com/videos/guYqV1AB-486405.mp4"
+	  	}, {
+	  		file: "http://content.bitsontherun.com/videos/guYqV1AB-604476.ogv"
+	  	}],
+	  	title: "Item 2 with a longer title",
+	  	duration: 30,
+	  	description: "Lorem ipsum dolor est, blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah "
+	  }, {
+	  	levels: [{
+	  		file: "http://content.bitsontherun.com/videos/DMJODX8R-486405.mp4"
+	  	}, {
+	  		file: "http://content.bitsontherun.com/videos/DMJODX8R-604476.ogv"
+	  	}],
+	  	image: "http://content.bitsontherun.com/thumbs/DMJODX8R-580.jpg",
+	  	title: "Item 3 Without A Duration"
+	  }, {
+	  	levels: [{
+	  		file: "http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4"
+	  	}, {
+	  		file: "http://content.bitsontherun.com/videos/gSzpo2wh-604476.ogv"
+	  	}],
+	  	image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg",
+	  	title: "Item 4"
+	  }, {
+	  	levels: [{
+	  		file: "http://content.bitsontherun.com/videos/guYqV1AB-486405.mp4"
+	  	}, {
+	  		file: "http://content.bitsontherun.com/videos/guYqV1AB-604476.ogv"
+	  	}],
+	  	image: "http://content.bitsontherun.com/thumbs/guYqV1AB-580.jpg",
+	  	title: "Item 5"
+	  }, {
+	  	levels: [{
+	  		file: "http://content.bitsontherun.com/videos/DMJODX8R-486405.mp4"
+	  	}, {
+	  		file: "http://content.bitsontherun.com/videos/DMJODX8R-604476.ogv"
+	  	}],
+	  	image: "http://content.bitsontherun.com/thumbs/DMJODX8R-580.jpg",
+	  	title: "Item 6"
+	  }];
+  </script>
+
+  <p>This shows all of the rendering options for the playlist
+  component.</p>
+
+  <p>Select a rendering mode: <select id="renderer">
+    <option value="flashonly">
+      Flash Only
+    </option>
+
+    <option value="html5only" selected="selected">
+      HTML5 Only
+    </option>
+  </select> <button id="go" onclick="setupAll()">Go</button></p>
+
+  <h3>Default (Position="none")</h3>
+
+  <div height="270" id="player1" width="580">
+    JW Player should replace this
+  </div>
+
+  <h3>Position="right"</h3>
+
+  <div height="270" id="player2" width="580">
+    JW Player should replace this
+  </div>
+
+  <h3>Position="left"</h3>
+
+  <div height="270" id="player3" width="580">
+    JW Player should replace this
+  </div>
+
+  <h3>Position="top"</h3>
+
+  <div height="270" id="player4" width="580">
+    JW Player should replace this
+  </div>
+
+  <h3>Position="top", controlbar="top"</h3>
+
+  <div height="270" id="player5" width="580">
+    JW Player should replace this
+  </div>
+
+  <h3>Position="bottom"</h3>
+
+  <div height="270" id="player6" width="580">
+    JW Player should replace this
+  </div>
+
+  <h3>Position="bottom", controlbar="bottom"</h3>
+
+  <div height="270" id="player7" width="580">
+    JW Player should replace this
+  </div>
+
+  <h3>Position="over"</h3>
+
+  <div height="270" id="player8" width="580">
+    JW Player should replace this
+  </div>
+
+  <h3>Playlist.thumbs = false</h3>
+
+  <div height="270" id="player9" width="580">
+    JW Player should replace this
+  </div>
+
+  <h3>Playlist with a skin</h3>
+
+  <div height="270" id="player10" width="580">
+    JW Player should replace this
+  </div>
+  
+  <script type="text/javascript">
+	  function setupAll() {
+	  	var mode = document.getElementById('renderer').value;
+	  	if (!mode) mode = "standard";
+	
+	  	var idx=1;
+	
+	  	jwplayer("player" + idx++).setup({
+	  		modes: settings.modes[mode],
+	  		playlist: playlistObj
+	  	});
+	
+	
+	  	jwplayer("player" + idx++).setup({
+	  		modes: settings.modes[mode],
+	  		playlist: playlistObj,
+	  		"playlist.position": "right",
+	  		"playlist.size": "195",
+	  	});
+	
+	  	jwplayer("player" + idx++).setup({
+	  		modes: settings.modes[mode],
+	  		playlist: playlistObj,
+	  		"playlist.position": "left",
+	  		"playlist.size": "195",
+	  	});
+	
+	  	jwplayer("player" + idx++).setup({
+	  		modes: settings.modes[mode],
+	  		playlist: playlistObj,
+	  		"playlist.position": "top",
+	  		"playlist.size": "120",
+	  	});
+	
+	  	jwplayer("player" + idx++).setup({
+	  		modes: settings.modes[mode],
+	  		playlist: playlistObj,
+	  		"controlbar.position": "top",
+	  		"playlist.position": "top",
+	  		"playlist.size": "120",
+	  	});
+	
+	  	jwplayer("player" + idx++).setup({
+	  		modes: settings.modes[mode],
+	  		playlist: playlistObj,
+	  		"playlist.position": "bottom",
+	  		"playlist.size": "120",
+	  	});
+	
+	
+	  	jwplayer("player" + idx++).setup({
+	  		modes: settings.modes[mode],
+	  		playlist: playlistObj,
+	  		"controlbar.position": "bottom",
+	  		"playlist.position": "bottom",
+	  		"playlist.size": "120",
+	  	});
+	
+	  	jwplayer("player" + idx++).setup({
+	  		modes: settings.modes[mode],
+	  		playlist: playlistObj,
+	  		"playlist.position": "over"
+	  	});
+	  	jwplayer("player" + idx++).setup({
+	  		modes: settings.modes[mode],
+	  		playlist: playlistObj,
+	  		"playlist.position": "right",
+	  		"playlist.size": "200",
+	  		"playlist.thumbs": false
+	  	});
+	  	jwplayer("player" + idx++).setup({
+	  		modes: settings.modes[mode],
+	  		playlist: playlistObj.slice(0,3),
+	  		"playlist.position": "right",
+	  		"playlist.size": "260",
+	  		skin: "testskin/testskin.xml"
+	  	});
+	
+	  }
+	
+	  setupAll();
+
+  </script>
+</body>
+</html>

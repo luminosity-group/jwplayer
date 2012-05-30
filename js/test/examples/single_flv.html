@@ -1,0 +1,35 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <title>Single FLV Example</title>
+        <script type="text/javascript" src="../../bin-debug/jwplayer.js">
+        </script>
+        <script type="text/javascript" src="settings.js">
+        </script>
+    </head>
+    <body>
+        <script type="text/javascript">
+            document.write("<h1>" + document.title + "</h1>");
+        </script>
+        <p>
+            This example should set up a Flash player on all browsers except iOS.
+        </p>
+			<button id="update" onclick="return setupAll();">Update</button>
+        </p>
+        
+        <div height="270" id="player" width="480">
+        	Player should replace this
+        </div>
+        <script type="text/javascript">
+        	function setupAll() {
+                jwplayer("player").setup({
+   		         	  modes: settings.modes['flash'],
+   		         	  file: "http://content.bitsontherun.com/videos/nPripu9l-floLrqBq.flv",
+    	        	  image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg"
+                });
+	          }
+	          setupAll();
+        </script>
+        <h3>HTML code</h3>
+    </body>
+</html>

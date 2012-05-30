@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <title>Chromeless</title>
+        <script type="text/javascript" src="../../bin-debug/jwplayer.js">
+        </script>
+        <script type="text/javascript" src="settings.js">
+        </script>
+    </head>
+    <body>
+        <script type="text/javascript">
+            document.write("<h1>" + document.title + "</h1>");
+        </script>
+        <p>
+            This is the basic setup for a video that plays natively on FF, Chrome, Safari, and Opera but will fail in IE.
+        </p>
+		<p onclick="hitme();">
+        <div height="270" id="player" width="480">
+        </div>
+		</p>
+        <div style="float:left">
+            <p>
+                Controls
+            </p>
+            <select id="controls">
+            </select>
+            <input type="text" id="controlvalue"/><a href="#" onclick="callPlayerFunction('controls', 'controlvalue');return false;">Call</a>
+        </div>
+        <div style="float:right">
+            <p>
+                Properties
+            </p>
+            <select id="properties">
+            </select>
+            <a href="#" onclick="callPlayerFunction('properties');return false;">Get Value</a>
+        </div>
+        <script type="text/javascript">
+            jwplayer("player").setup({
+            	players: settings.players(window.location.href),
+            	levels: [{
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4"
+            	}, {
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-604476.ogv"
+            	}],
+            	image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg",
+            	chromeless: true,
+            	debug: "console"
+            });
+            
+            function callPlayerFunction(functionid, valueid) {
+            	if (window.console && console.log) console.log(functionid, valueid);
+            	if (document.getElementById(valueid) && document.getElementById(valueid).value !== "") {
+            		jwplayer("player")[document.getElementById(functionid).value](document.getElementById(valueid).value);
+            	} else {
+            		if (window.console && console.log) console.log(jwplayer("player")[document.getElementById(functionid).value]());
+            	}
+            }
+            
+			var controls = {
+            	Play: "play",
+            	Pause: "pause",
+            	Stop: "stop",
+            	Seek: "seek",
+            	Item: "playlistItem",
+            	Next: "playlistNext",
+            	Previous: "playlistPrev",
+            	Resize: "resize",
+            	Load: "load",
+            	Volume: "setVolume",
+            	Mute: "setMute",
+            	Fullscreen: "setFullscreen",
+            	"Add Listener": "addEventListener",
+            	"Remove Listener": "removeEventListener",
+            	"Send Event": "sendEvent"
+            };
+            
+            var properties = {
+            	Version: "getVersion",
+            	State: "getState",
+            	Item: "getItem",
+            	Width: "getWidth",
+            	Height: "getHeight",
+            	Volume: "getVolume",
+            	Mute: "getMute",
+            	Position: "getPosition",
+            	Duration: "getDuration",
+            	Buffer: "getBuffer",
+            	Fullscreen: "getFullscreen",
+            	Playlist: "getPlaylist"
+            };
+			
+            /*var controls = {
+            	Play: "jwPlay",
+            	Pause: "jwPause",
+            	Stop: "jwStop",
+            	Seek: "jwSeek",
+            	Item: "jwPlaylistItem",
+            	Next: "jwPlaylistNext",
+            	Previous: "jwPlaylistPrev",
+            	Resize: "jwResize",
+            	Load: "jwLoad",
+            	Volume: "jwSetVolume",
+            	Mute: "jwSetMute",
+            	Fullscreen: "jwSetFullscreen",
+            	"Add Listener": "jwAddEventListener",
+            	"Remove Listener": "jwRemoveEventListener",
+            	"Send Event": "jwSendEvent"
+            };
+            
+            var properties = {
+            	Version: "jwGetVersion",
+            	State: "jwGetState",
+            	Item: "jwGetItem",
+            	Width: "jwGetWidth",
+            	Height: "jwGetHeight",
+            	Volume: "jwGetVolume",
+            	Mute: "jwGetMute",
+            	Position: "jwGetPosition",
+            	Duration: "jwGetDuration",
+            	Buffer: "jwGetBuffer",
+            	Fullscreen: "jwGetFullscreen",
+            	Playlist: "jwGetPlaylist"
+            };*/
+            
+            for (var control in controls) {
+            	var listItem = document.createElement("option");
+            	listItem.value = controls[control];
+            	listItem.innerHTML = control;
+            	document.getElementById('controls').appendChild(listItem);
+            }
+            
+            for (var property in properties) {
+            	var listItem = document.createElement("option");
+            	listItem.value = properties[property];
+            	listItem.innerHTML = property;
+            	document.getElementById('properties').appendChild(listItem);
+            }
+        </script>
+        <h3>HTML code</h3>
+    </body>
+</html>

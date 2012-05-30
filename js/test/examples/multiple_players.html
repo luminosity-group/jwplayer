@@ -1,0 +1,52 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <title>Multiple Video Example</title>
+        <script type="text/javascript" src="../../bin-debug/jwplayer.js">
+        </script>
+        <script type="text/javascript" src="settings.js">
+        </script>
+    </head>
+    <body>
+        <script type="text/javascript">
+            document.write("<h1>" + document.title + "</h1>");
+        </script>
+ 		<p>
+           This contains two players with multiple sources, so it should play back in IE9, FF, Chrome, Safari, and Opera. IE < 9 will simply display "HTML5 Player should replace this".
+        </p>
+		<p>
+			For now, same videos with same options, but this will change.
+		</p>
+        <h3>Player 1</h3>
+        <div height="270" id="player1" width="480">
+        	HTML5 Player should replace this
+        </div>
+        <h3>Player 2</h3>
+        <div height="270" id="player2" width="480">
+        	HTML5 Player should replace this
+        </div>
+        <script type="text/javascript">
+            jwplayer("player1").setup({
+            	players: settings.players(window.location.href),
+            	levels: [{
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4"
+            	}, {
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-604476.ogv"
+            	}],
+            	image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg"
+            
+            });
+            jwplayer("player2").setup({
+            	players: settings.players(window.location.href),
+            	levels: [{
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4"
+            	}, {
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-604476.ogv"
+            	}],
+            	image: "http://playertest.longtailvideo.com/oorlogswinter.png"
+            
+            });
+        </script>
+        <h3>HTML code</h3>
+    </body>
+</html>

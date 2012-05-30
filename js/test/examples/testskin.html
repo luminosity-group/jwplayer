@@ -1,0 +1,34 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <title>302ed skin with no controlbar settings</title>
+        <script type="text/javascript" src="../../bin-debug/jwplayer.js">
+        </script>
+        <script type="text/javascript" src="settings.js">
+        </script>
+    </head>
+    <body>
+        <script type="text/javascript">
+            document.write("<h1>" + document.title + "</h1>");
+        </script>
+        <p>
+            This parses a &lt;video&gt; tag and sets up a player in it's place for IE9, FF, Chrome, Safari, and Opera. IE < 9 will simply display "HTML5 Player should replace this".
+        </p>
+        <video height="270" id="player" poster="http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg" width="480">
+            <source src="http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4" type="video/mp4" /><source src="http://content.bitsontherun.com/videos/gSzpo2wh-604476.ogv" type="video/ogg" />
+            <p>
+                HTML5 Player should replace this.
+            </p>
+        </video>
+        <script type="text/javascript">
+            jwplayer("player").setup({
+            	players: settings.players(window.location.href),
+            	players: [{
+            		type: "html5"
+            	}],
+				skin: "./testskin/oldskin.php"
+            });
+        </script>
+        <h3>HTML code</h3>
+    </body>
+</html>

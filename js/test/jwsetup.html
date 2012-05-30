@@ -1,0 +1,93 @@
+<html>
+	<head>
+		<title>JW Embedder Setup Configurator</title>
+		<script src="../bin-debug/jwplayer.js"></script>
+		<script src="jquery.js"></script>
+
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$.extend({
+				    
+				    initialize: function() {
+		                window.top.location.search.replace(/\??(?:([^=]+)=([^&]*)&?)/g,function () {
+		                	if(arguments[1] == 'config') {
+		                		$("#setupOptions").val(decodeURIComponent(arguments[2]));
+		                	} 
+		                });
+				    },
+				    
+					setupPlayer: function() {
+					    var defaults = {
+					       height: 300,
+					       width: 420,
+					       modes: [
+					           { type: "flash", src: "../../player.swf" },
+					           { type: "html5" },
+					           { type: "download" }
+					       ]
+					    };
+						
+						$('#preview').css('height',defaults.height);
+						$('#preview').html('<div id="container"></div>');
+						
+						var optionText = $("#setupOptions").val();
+
+						var evalOptions;
+						try {
+                            evalOptions = optionText ? eval('('+optionText+')') : undefined;
+						} catch(e) {
+						    optionText = decodeURIComponent(optionText);
+                            evalOptions = optionText ? eval('('+optionText+')') : undefined;
+                            $("#setupOptions").val(optionText);
+						}
+                        
+						if (optionText && typeof(evalOptions) == "undefined") {
+  						  alert("Error parsing options");
+   						  return; 
+						}
+
+       					var options = $.extend({}, defaults, evalOptions);
+   						jwplayer('container').setup(options);
+   						
+   						
+					},
+					
+					setupForm: function() {
+						for(var i in $_GET) {
+							if($_GET[i]) {
+								$("#flashvars").text($("#flashvars").text() + i + "=" + $_GET[i] + "\n");
+							}
+						}
+					}
+				});
+				
+				$("#theForm").submit(function() {
+					var url = window.top.location.pathname + "?config=";
+                    url += encodeURIComponent($("#setupOptions").val())
+					window.top.location.href = url;
+					return false;
+				});
+				
+		        var $_GET = {};
+				$.initialize();
+				$.setupPlayer();
+				$.setupForm();
+			});
+		</script>		
+		
+	</head>
+	<body>
+		<form id="theForm">
+			<fieldset>
+				<label>Player</label>
+        		<div id="preview"></div>
+			</fieldset>
+			<fieldset>
+				<label>Options</label>
+				<textarea id="setupOptions" style="width:700; height: 300;"></textarea>
+			</fieldset>
+			<input type="button" value="Setup Player" onclick="$.setupPlayer()" />
+			<input type="submit" value="Save URL" />
+		</form>
+	</body>
+</html>

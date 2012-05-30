@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <title>Multiple custom players</title>
+        <script type="text/javascript" src="../../bin-debug/jwplayer.js">
+        </script>
+        <script type="text/javascript" src="settings.js">
+        </script>
+    </head>
+    <body>
+        <script type="text/javascript">
+            document.write("<h1>" + document.title + "</h1>");
+        </script>
+        <p>
+            This page tests various configuration options.
+        </p>
+        <p>
+            It contains two players with multiple sources, so it should play back in IE9, FF, Chrome, Safari, and Opera. IE < 9 will simply display "HTML5 Player should replace this".
+        </p>
+        <h3>Player 1</h3>
+        <p>
+            Autostart, mute, repeats (single) playlist item, debug enabled.
+        </p>
+        <div height="270" id="player1" width="480">
+            HTML5 Player should replace this
+        </div>
+        <script type="text/javascript">
+            jwplayer("player1").setup({
+            	players: settings.players(window.location.href),
+            	autostart: true,
+            	mute: true,
+            	repeat: "single",
+            	levels: [{
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4"
+            	}, {
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-604476.ogv"
+            	}],
+            	image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg",
+            	debug: "console"
+            
+            });
+        </script>
+        <h3>Player 2</h3>
+        <p>
+            Different dimensions, screencolor, duration, volume, skin (Stromtrooper)
+        </p>
+        <div height="270" id="player2" width="480">
+            HTML5 Player should replace this
+        </div>
+        <script type="text/javascript">
+            jwplayer("player2").setup({
+            	players: settings.players(window.location.href),
+            	height: 260,
+            	width: 500,
+            	screencolor: "00bee0",
+            	duration: 45,
+            	volume: 50,
+            	levels: [{
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4"
+            	}, {
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-604476.ogv"
+            	}],
+            	image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg",
+            	skin: "../../../../../skins/stormtrooper/stormtrooper.xml"
+            });
+        </script>
+        <h3>Player 3</h3>
+        <p>
+            Percentage height / width
+        </p>
+        <div height="270" id="player3" width="480">
+            HTML5 Player should replace this
+        </div>
+        <!--div style="background-color:black; width:50%; height:50%; position:absolute; display:block; ">
+            &nbsp;
+        </div-->
+        <script type="text/javascript">
+            jwplayer("player3").setup({
+            	players: settings.players(window.location.href),
+            	height: "88%",
+            	width: "50%",
+            	levels: [{
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4"
+            	}, {
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-604476.ogv"
+            	}],
+            	image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg"
+            });
+        </script>
+        <h3>HTML code</h3>
+    </body>
+</html>

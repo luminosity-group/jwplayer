@@ -1,0 +1,234 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <title>Dock</title>
+        <script type="text/javascript" src="../../bin-debug/jwplayer.js">
+        </script>
+        <script type="text/javascript" src="settings.js">
+        </script>
+    </head>
+    <body>
+        <script type="text/javascript">
+            document.write("<h1>" + document.title + "</h1>");
+        </script>
+        <p>
+            This shows all of the rendering options for the dock.
+        </p>
+        <p>
+            It contains nine players with multiple sources, so it should play back in IE9, FF, Chrome, Safari, and Opera. IE < 9 will simply display "HTML5 Player should replace this".
+        </p>
+        <p>
+          Select a rendering mode: 
+          <select id="renderer">
+            <option value="flashonly">Flash Only</option>
+            <option value="html5only" selected="selected">HTML5 Only</option>
+          </select>
+          <button id="go" onclick="setupAll()">Go</button>
+        </p>
+		<p>
+			Default (Boolean true)
+		</p>
+        <div height="270" id="player1" width="480">
+            HTML5 Player should replace this
+        </div>
+		<p>
+			Boolean true
+		</p>
+        <div height="270" id="player2" width="480">
+            HTML5 Player should replace this
+        </div>
+		<p>
+			String true
+		</p>
+        <div height="270" id="player3" width="480">
+            HTML5 Player should replace this
+        </div>
+		<p>
+			Boolean false
+		</p>
+        <div height="270" id="player4" width="480">
+            HTML5 Player should replace this
+        </div>
+		<p>
+			String false
+		</p>
+        <div height="270" id="player5" width="480">
+            HTML5 Player should replace this
+        </div>
+		<p>
+			Components block w/ boolean true
+		</p>
+        <div height="270" id="player6" width="480">
+            HTML5 Player should replace this
+        </div>
+		<p>
+			Components block w/ boolean false
+		</p>
+        <div height="270" id="player7" width="480">
+            HTML5 Player should replace this
+        </div>
+		<p>
+			Left
+		</p>
+        <div height="270" id="player8" width="480">
+            HTML5 Player should replace this
+        </div>
+		<p>
+			Right
+		</p>
+        <div height="270" id="player9" width="480">
+            HTML5 Player should replace this
+        </div>
+		<p>
+			With a skin
+		</p>
+        <div height="270" id="player10" width="480">
+            HTML5 Player should replace this
+        </div>
+
+        <script type="text/javascript">
+       	  function setupAll() {
+            var mode = document.getElementById('renderer').value;
+            if (!mode) mode = "standard";
+             	  
+           	jwplayer("player1").setup({
+            	modes: settings.modes[mode],
+             	levels: [{
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4"
+            	}, {
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-604476.ogv"
+            	}],
+            	image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg",
+				plugins: {
+					'./plugins/dockplugin.js': {}
+				}
+            });
+            jwplayer("player2").setup({
+            	modes: settings.modes[mode],
+             	levels: [{
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4"
+            	}, {
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-604476.ogv"
+            	}],
+            	image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg",
+				plugins: {
+					'./plugins/dockplugin.js': {}
+				},
+            	dock: true
+            });
+            jwplayer("player3").setup({
+            	modes: settings.modes[mode],
+             	levels: [{
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4"
+            	}, {
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-604476.ogv"
+            	}],
+            	image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg",
+				plugins: {
+					'./plugins/dockplugin.js': {}
+				},
+            	dock: "true"
+            });
+            jwplayer("player4").setup({
+            	modes: settings.modes[mode],
+             	levels: [{
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4"
+            	}, {
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-604476.ogv"
+            	}],
+            	image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg",
+				plugins: {
+					'./plugins/dockplugin.js': {}
+				},
+				dock: false
+            });
+            jwplayer("player5").setup({
+            	modes: settings.modes[mode],
+             	levels: [{
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4"
+            	}, {
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-604476.ogv"
+            	}],
+            	image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg",
+				plugins: {
+					'./plugins/dockplugin.js': {}
+				},
+				dock: "false"
+            });
+            jwplayer("player6").setup({
+            	modes: settings.modes[mode],
+            	levels: [{
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4"
+            	}, {
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-604476.ogv"
+            	}],
+            	image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg",
+				plugins: {
+					'./plugins/dockplugin.js': {}
+				},
+            	components: {
+					dock: true
+				}
+            });
+            jwplayer("player7").setup({
+            	modes: settings.modes[mode],
+            	levels: [{
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4"
+            	}, {
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-604476.ogv"
+            	}],
+            	image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg",
+				plugins: {
+					'./plugins/dockplugin.js': {}
+				},
+            	components: {
+					dock: false
+				}
+            });
+            jwplayer("player8").setup({
+            	modes: settings.modes[mode],
+             	levels: [{
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4"
+            	}, {
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-604476.ogv"
+            	}],
+            	image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg",
+				plugins: {
+					'./plugins/dockplugin.js': {}
+				},
+				dock: "left"
+            });
+            jwplayer("player9").setup({
+            	modes: settings.modes[mode],
+             	levels: [{
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4"
+            	}, {
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-604476.ogv"
+            	}],
+            	image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg",
+				plugins: {
+					'./plugins/dockplugin.js': {}
+				},
+				dock: "right"
+            });
+            jwplayer("player10").setup({
+            	modes: settings.modes[mode],
+             	levels: [{
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-486405.mp4"
+            	}, {
+            		file: "http://content.bitsontherun.com/videos/gSzpo2wh-604476.ogv"
+            	}],
+            	image: "http://content.bitsontherun.com/thumbs/gSzpo2wh-480.jpg",
+				plugins: {
+					'./plugins/dockplugin.js': {}
+				},
+				dock: "right",
+				skin: "./testskin/testskin.xml"
+            });
+       	  }
+
+       	  setupAll();
+        </script>
+        <h3>HTML code</h3>
+	    </body>
+</html>

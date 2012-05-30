@@ -1,0 +1,109 @@
+<html>
+	<head>
+		<title>Arbitrary Flashvar injection</title>
+		<script src="./swfobject.js"></script>
+		<script src="./jquery.js"></script>
+
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$.extend({
+					getVars: function() {
+		                window.top.location.search.replace(/\??(?:([^=]+)=([^&]*)&?)/g,function () {
+		                	if(arguments[1] == 'player') {
+		                		$("#players").val(decodeURIComponent(arguments[2]));
+		                	} 
+		                	if(arguments[1] != 'debug') {
+								$_GET[decodeURIComponent(arguments[1])] = decodeURIComponent(arguments[2]);
+							}
+		                });
+		                if (!($("#players").val()) && !($_GET['player'])) {
+		                	$("#players").val('v5');
+		                }
+					},
+					
+					setupPlayer: function() {
+						var height = $_GET['height'] ? $_GET['height'] : 300;
+						var width = $_GET['width'] ? $_GET['width'] : 420;
+						
+						$('#preview').css('height',height);
+						$('#preview').html('<div id="container"></div>');
+						
+						swfobject.embedSWF(
+							$('#players').val() ? $('#players').val() : $_GET['player'],
+							'container',
+							width,
+							height,
+							'9.0.0',
+							null,
+							$_GET,
+							{allowfullscreen:'true',allowscriptaccess:'always'},
+							{id:'player', name:'player'}
+						);
+					},
+					
+					setupForm: function() {
+						for(var i in $_GET) {
+							if($_GET[i] && i != "player") {
+								$("#flashvars").text($("#flashvars").text() + i + "=" + $_GET[i] + "\n");
+							}
+						}
+					}
+				});
+				
+				$("#players").change(function() {
+				  $.setupPlayer();
+				});
+				
+				$("#theForm").submit(function() {
+					var url = window.top.location.pathname + "?player=" + $("#players :selected").text();
+					$("#flashvars").val().replace(/(.+)=(.+)\n?/g, function() {
+						url += "&" + arguments[1] + "=" + encodeURIComponent(arguments[2]);
+					});
+
+					window.top.location.href = url;
+					return false;
+				});
+				
+        var $_GET = {};
+				$.getVars();
+				$.setupPlayer();
+				$.setupForm();
+			});
+		</script>		
+		
+	</head>
+	<body>
+		<div id="preview"></div>
+		<form id="theForm">
+			<fieldset>
+				<label>Player</label>
+				<select id="players">
+					<option value=''></option>
+					<option value='../../player.swf'>v5</option>
+					<!--option value='../../../../commercial/trunk/player-licensed.swf'>v5c</option-->
+					<option value='../../../../tags/mediaplayer-5.8/player.swf'>5.8</option>
+					<option value='../../../../tags/mediaplayer-5.7/player.swf'>5.7</option>
+					<option value='../../../../tags/mediaplayer-5.6/player.swf'>5.6</option>
+					<option value='../../../../tags/mediaplayer-5.5/player.swf'>5.5</option>
+					<option value='../../../../tags/mediaplayer-5.4/player.swf'>5.4</option>
+					<option value='../../../../tags/mediaplayer-5.3/player.swf'>5.3</option>
+					<option value='../../../../tags/mediaplayer-5.2/player.swf'>5.2</option>
+					<option value='../../../../tags/mediaplayer-5.1/player.swf'>5.1</option>
+					<option value='../../../../tags/mediaplayer-5.0/player.swf'>5.0</option>
+					<option value='../../../../tags/mediaplayer-4.7/player.swf'>4.7</option>
+					<option value='../../../../tags/mediaplayer-4.6/player.swf'>4.6</option>
+					<option value='../../../../tags/mediaplayer-4.5/player.swf'>4.5</option>
+					<option value='../../../../tags/mediaplayer-4.4/player.swf'>4.4</option>
+					<option value='../../../../tags/mediaplayer-4.3/player.swf'>4.3</option>
+					<option value='../../../../tags/mediaplayer-4.2/player.swf'>4.2</option>
+					<option value='../../../../tags/mediaplayer-4.1/player.swf'>4.1</option>
+					<option value='../../../as3/player.swf'>v4</option>
+				</select>
+			</fieldset>
+			<fieldset>
+				<textarea id="flashvars" style="width:700; height: 300;"></textarea>
+			</fieldset>
+			<input type="submit" value="Update" />
+		</form>
+	</body>
+</html>
