@@ -1666,27 +1666,29 @@ jwplayer.source = document.createElement("source");/**
 				isArray = (obj && obj.constructor == Array);
 				
 			for (var item in obj) {
-				var value = obj[item];
-				
-				switch (typeof(value)) {
-					case "string":
-						value = '"' + value.replace(/"/g, '\\"') + '"';
-						break;
-					case "object":
-						if (jwplayer.utils.exists(value)) {
-							value = jwplayer.utils.strings.jsonToString(value);
-						}
-						break;
-				}
-				if (isArray) {
-					// Array
-					if (typeof(value) != "function") {
-						toReturn.push(String(value));
+				if (obj.hasOwnProperty(item)) {
+					var value = obj[item];
+					
+					switch (typeof(value)) {
+						case "string":
+							value = '"' + value.replace(/"/g, '\\"') + '"';
+							break;
+						case "object":
+							if (jwplayer.utils.exists(value)) {
+								value = jwplayer.utils.strings.jsonToString(value);
+							}
+							break;
 					}
-				} else {
-					// Object
-					if (typeof(value) != "function") {
-						toReturn.push('"' + item + '":' + String(value));
+					if (isArray) {
+						// Array
+						if (typeof(value) != "function") {
+							toReturn.push(String(value));
+						}
+					} else {
+						// Object
+						if (typeof(value) != "function") {
+							toReturn.push('"' + item + '":' + String(value));
+						}
 					}
 				}
 			}
